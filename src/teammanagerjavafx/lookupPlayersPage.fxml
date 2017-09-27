@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="teammanagerjavafx.LookupPlayersPageController">
+   <children>
+      <HBox prefHeight="70.0" prefWidth="649.0" />
+      <TableView fx:id="table" layoutX="4.0" layoutY="70.0" prefHeight="328.0" prefWidth="642.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="44.333343505859375" text="ID" />
+          <TableColumn fx:id="fName" prefWidth="89.0" text="First Name" />
+          <TableColumn fx:id="lName" prefWidth="133.0" text="Last Name" />
+            <TableColumn fx:id="playerNumber" prefWidth="66.0" text="Player #" />
+            <TableColumn fx:id="positionCol" minWidth="0.0" prefWidth="53.66668701171875" text="Position" />
+            <TableColumn fx:id="armCol" prefWidth="109.33331298828125" text="Throwing Arm" />
+            <TableColumn fx:id="stanceCol" prefWidth="90.33331298828125" text="Batting Stance" />
+            <TableColumn fx:id="teamIDCol" prefWidth="56.33331298828125" text="Team ID" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="teammanagerjavafx.MainMenuController">
+   <children>
+      <Button fx:id="createPlayerButton" layoutX="46.0" layoutY="41.0" mnemonicParsing="false" onAction="#handlePlayerButton" text="Create Player" />
+      <Button fx:id="createTeamButton" layoutX="46.0" layoutY="81.0" mnemonicParsing="false" onAction="#handleTeamButton" prefHeight="25.0" prefWidth="86.0" text="Create Team" />
+      <Button fx:id="lookupPlayerIDButton" layoutX="304.0" layoutY="94.0" mnemonicParsing="false" onAction="#handleLookupPlayerID" prefHeight="46.0" prefWidth="101.0" text="Lookup Player by ID" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="lookupPlayerNameButton" layoutX="304.0" layoutY="154.0" mnemonicParsing="false" onAction="#handleLookupPlayerName" prefHeight="46.0" prefWidth="101.0" text="Lookup Player by Name" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="updateManagerButton" layoutX="466.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleUpdateManager" text="Update Manager" />
+      <Button fx:id="updatePitcherButton" layoutX="244.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleUpdatePitcher" text="Update Pitcher" />
+      <Button fx:id="updateHitterButton" layoutX="132.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleUpdateHitter" text="Update Hitter" />
+      <Button fx:id="updatePlayerButton" layoutX="14.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleUpdatePlayer" text="Update Player" />
+      <Button fx:id="updateTeamButton" layoutX="361.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleUpdateTeam" text="Update Team" />
+      <Button fx:id="lookupPlayersButton" layoutX="329.0" layoutY="223.0" mnemonicParsing="false" onAction="#handleLookupPlayers" text="Lookup Players" />
+   </children>
+</AnchorPane>
