@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package teammanager;
-import Data.Hitter;
-import Data.Player; 
+import Model.Hitter;
+import Model.Player; 
 /**
  *
  * @author hasmy

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LookupHittersPageController">
+   <children>
+      <HBox prefHeight="83.0" prefWidth="722.0" />
+      <TableView fx:id="table" layoutY="83.0" prefHeight="316.0" prefWidth="722.0">
+        <columns>
+          <TableColumn fx:id="pIDCol" prefWidth="45.0" text="ID" />
+          <TableColumn fx:id="abCol" prefWidth="31.666656494140625" text="AB" />
+            <TableColumn fx:id="hCol" prefWidth="42.999969482421875" text="H" />
+            <TableColumn fx:id="b2Col" prefWidth="34.000030517578125" text="B2" />
+            <TableColumn fx:id="b3Col" prefWidth="42.333343505859375" text="B3" />
+            <TableColumn fx:id="hrCol" prefWidth="48.0" text="HR" />
+            <TableColumn fx:id="avgCol" prefWidth="39.0" text="AVG" />
+            <TableColumn fx:id="tbCol" prefWidth="39.0" text="TB" />
+            <TableColumn fx:id="obpCol" prefWidth="41.0" text="OBP" />
+            <TableColumn fx:id="rbiCol" prefWidth="41.0" text="RBI" />
+            <TableColumn fx:id="slugCol" prefWidth="39.0" text="SLG" />
+            <TableColumn fx:id="bbCol" prefWidth="39.0" text="BB" />
+            <TableColumn fx:id="soCol" prefWidth="41.0" text="SO" />
+            <TableColumn fx:id="hbpCol" prefWidth="39.0" text="HBP" />
+            <TableColumn fx:id="sbCol" prefWidth="39.0" text="SB" />
+            <TableColumn fx:id="csCol" prefWidth="39.0" text="CS" />
+            <TableColumn fx:id="sbpCol" prefWidth="41.0" text="SB %" />
+            <TableColumn fx:id="sacCol" prefWidth="39.0" text="SAC" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

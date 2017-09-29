@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?scenebuilder-stylesheet /CSS/mainmenu.css?>
+
+<AnchorPane id="AnchorPane" prefHeight="641.0" prefWidth="651.0" styleClass="anchorPane" stylesheets="@../CSS/mainmenu.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+   <children>
+      <Pane layoutX="14.0" layoutY="8.0" prefHeight="70.0" prefWidth="314.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
+         <children>
+            <Label layoutX="13.0" layoutY="16.0" styleClass="titleText" stylesheets="@../CSS/mainmenu.css" text="Baseball League Manager">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="344.0" layoutY="17.0" prefHeight="224.0" prefWidth="288.0" styleClass="tablePane" stylesheets="@../CSS/mainmenu.css">
+         <children>
+            <Label layoutX="27.0" layoutY="14.0" text="League Standings" />
+            <TableView fx:id="lsTable" layoutX="14.0" layoutY="56.0" prefHeight="154.0" prefWidth="261.0">
+              <columns>
+                <TableColumn fx:id="lsteamCol" minWidth="70.0" prefWidth="90.0" text="Team" />
+                <TableColumn fx:id="lswCol" prefWidth="31.33331298828125" text="W" />
+                  <TableColumn fx:id="lslCol" prefWidth="43.0" text="L" />
+                  <TableColumn fx:id="lstCol" prefWidth="41.0" text="T" />
+                  <TableColumn fx:id="lswpCol" prefWidth="57.0" text="W %" />
+              </columns>
+            </TableView>
+            <Button fx:id="lsRefresh" layoutX="198.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlelsRefresh" text="Refresh" />
+         </children>
+      </Pane>
+      <Pane layoutX="344.0" layoutY="259.0" prefHeight="369.0" prefWidth="288.0" styleClass="tablePane" stylesheets="@../CSS/mainmenu.css">
+         <children>
+            <Button layoutX="32.0" layoutY="44.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Hitters" />
+            <Button layoutX="144.0" layoutY="44.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Pitchers" />
+            <Label layoutX="25.0" layoutY="14.0" text="League Leaders" />
+            <VBox layoutX="66.0" layoutY="70.0" prefHeight="63.0" prefWidth="185.0">
+               <children>
+                  <Label fx:id="topAvgNamelbl" prefHeight="32.0" prefWidth="186.0" text="LAST NAME, FIRST NAME" />
+                  <HBox prefHeight="31.0" prefWidth="185.0">
+                     <children>
+                        <Label fx:id="topAvgTeamlbl" prefHeight="31.0" prefWidth="99.0" text="TEAM" />
+                        <Label fx:id="topAvglbl" prefHeight="31.0" prefWidth="120.0" text="AVERAGE" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Label fx:id="avglbl" layoutX="20.0" layoutY="86.0" prefHeight="32.0" prefWidth="43.0" rotate="270.0" text="AVG">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <VBox layoutX="66.0" layoutY="140.0" prefHeight="63.0" prefWidth="185.0">
+               <children>
+                  <Label prefHeight="32.0" prefWidth="186.0" text="LAST NAME, FIRST NAME" />
+                  <HBox prefHeight="31.0" prefWidth="185.0">
+                     <children>
+                        <Label prefHeight="31.0" prefWidth="99.0" text="TEAM" />
+                        <Label prefHeight="31.0" prefWidth="120.0" text="HR" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Label layoutX="20.0" layoutY="156.0" prefHeight="32.0" prefWidth="43.0" rotate="270.0" text="HR">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <VBox layoutX="66.0" layoutY="214.0" prefHeight="63.0" prefWidth="185.0">
+               <children>
+                  <Label prefHeight="32.0" prefWidth="186.0" text="LAST NAME, FIRST NAME" />
+                  <HBox prefHeight="31.0" prefWidth="185.0">
+                     <children>
+                        <Label prefHeight="31.0" prefWidth="99.0" text="TEAM" />
+                        <Label prefHeight="31.0" prefWidth="120.0" text="RBI" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Label layoutX="20.0" layoutY="230.0" prefHeight="32.0" prefWidth="43.0" rotate="270.0" text="RBI">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <VBox layoutX="66.0" layoutY="292.0" prefHeight="63.0" prefWidth="185.0">
+               <children>
+                  <Label prefHeight="32.0" prefWidth="186.0" text="LAST NAME, FIRST NAME" />
+                  <HBox prefHeight="31.0" prefWidth="185.0">
+                     <children>
+                        <Label prefHeight="31.0" prefWidth="99.0" text="TEAM" />
+                        <Label prefHeight="31.0" prefWidth="120.0" text="SB" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Label layoutX="20.0" layoutY="308.0" prefHeight="32.0" prefWidth="43.0" rotate="270.0" text="SB">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="26.0" layoutY="91.0" prefHeight="84.0" prefWidth="297.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
+         <children>
+            <Label layoutX="7.0" layoutY="6.0" text="Create!" />
+            <Button fx:id="createTeamButton" layoutX="37.0" layoutY="31.0" mnemonicParsing="false" onAction="#handleTeamButton" prefHeight="25.0" prefWidth="86.0" text="Create Team" />
+            <Button fx:id="createPlayerButton" layoutX="169.0" layoutY="30.0" mnemonicParsing="false" onAction="#handlePlayerButton" text="Create Player" />
+         </children>
+      </Pane>
+      <Pane layoutX="26.0" layoutY="183.0" prefHeight="138.0" prefWidth="297.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
+         <children>
+            <Label layoutX="7.0" layoutY="6.0" text="Update!" />
+            <Button fx:id="updatePlayerButton" layoutX="41.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleUpdatePlayer" text="Update Player" />
+            <Button fx:id="updateHitterButton" layoutX="176.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleUpdateHitter" text="Update Hitter" />
+            <Button fx:id="updatePitcherButton" layoutX="39.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleUpdatePitcher" text="Update Pitcher" />
+            <Button fx:id="updateTeamButton" layoutX="176.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleUpdateTeam" text="Update Team" />
+            <Button fx:id="updateManagerButton" layoutX="41.0" layoutY="99.0" mnemonicParsing="false" onAction="#handleUpdateManager" text="Update Manager" />
+         </children>
+      </Pane>
+      <Pane layoutX="26.0" layoutY="333.0" prefHeight="129.0" prefWidth="297.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
+         <children>
+            <Label layoutX="7.0" layoutY="6.0" text="Lookup!" />
+            <Button fx:id="lookupPlayersButton" layoutX="42.0" layoutY="71.0" mnemonicParsing="false" onAction="#handleLookupPlayers" text="Lookup Players" />
+            <Button fx:id="lookupPitcherButton" layoutX="176.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleLookupPitchers" text="Lookup Pitchers" />
+            <Button fx:id="lookupHittersButton" layoutX="43.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleLookupHitters" text="Lookup Hitters" />
+            <Button layoutX="176.0" layoutY="71.0" mnemonicParsing="false" text="Lookup Manager" />
+         </children>
+      </Pane>
+      <Button fx:id="lookupPlayerIDButton" layoutX="54.0" layoutY="581.0" mnemonicParsing="false" onAction="#handleLookupPlayerID" prefHeight="46.0" prefWidth="101.0" text="Lookup Player by ID" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="lookupPlayerNameButton" layoutX="155.0" layoutY="581.0" mnemonicParsing="false" onAction="#handleLookupPlayerName" prefHeight="46.0" prefWidth="101.0" text="Lookup Player by Name" textAlignment="CENTER" wrapText="true" />
+   </children>
+</AnchorPane>
