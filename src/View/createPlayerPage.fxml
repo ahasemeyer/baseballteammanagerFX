@@ -5,27 +5,40 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CreatePlayerPageController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="392.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CreatePlayerPageController">
    <children>
-      <TextField fx:id="firstName" layoutX="43.0" layoutY="70.0" promptText="Enter First Name" />
+      <RadioButton fx:id="hitterRadio" layoutX="216.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleHitterRadio" text="Hitter" />
+      <RadioButton fx:id="pitcherRadio" layoutX="300.0" layoutY="248.0" mnemonicParsing="false" onAction="#handlePitcherRadio" text="Pitcher" />
+      <RadioButton fx:id="managerRadio" layoutX="216.0" layoutY="277.0" mnemonicParsing="false" onAction="#handleManagerRadio" text="Manager" />
       <Label layoutX="61.0" layoutY="14.0" text="Fill out the form to create a player">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="lastName" layoutX="233.0" layoutY="70.0" promptText="Enter Last Name" />
-      <TextField fx:id="number" layoutX="43.0" layoutY="121.0" promptText="Player Number" />
+      <Button layoutX="261.0" layoutY="199.0" mnemonicParsing="false" onAction="#handlePicture" text="Upload Picture" />
       <Button layoutX="265.0" layoutY="315.0" mnemonicParsing="false" onAction="#createPlayerButton" text="Create Player" />
-      <ComboBox fx:id="teamCombo" layoutX="41.0" layoutY="315.0" prefWidth="150.0" promptText="Team Name" />
-      <ComboBox fx:id="battingStanceCombo" layoutX="41.0" layoutY="273.0" prefWidth="150.0" promptText="Batting Stance" />
-      <ComboBox fx:id="throwingArmCombo" layoutX="41.0" layoutY="223.0" prefWidth="150.0" promptText="Throwing Arm" />
-      <ComboBox fx:id="positionCombo" layoutX="43.0" layoutY="172.0" prefWidth="150.0" promptText="Position" />
-      <RadioButton fx:id="pitcherRadio" layoutX="300.0" layoutY="248.0" mnemonicParsing="false" onAction="#handlePitcherRadio" text="Pitcher" />
-      <RadioButton fx:id="hitterRadio" layoutX="216.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleHitterRadio" text="Hitter" />
-      <RadioButton fx:id="managerRadio" layoutX="216.0" layoutY="277.0" mnemonicParsing="false" onAction="#handleManagerRadio" text="Manager" />
       <Label fx:id="errorMessageLabel" layoutX="44.0" layoutY="351.0" prefHeight="39.0" prefWidth="323.0" textFill="RED" wrapText="true" />
+      <ImageView fx:id="profilePicture" fitHeight="136.0" fitWidth="129.0" layoutX="244.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/defaultProfile.jpg" />
+         </image>
+      </ImageView>
+      <VBox layoutX="28.0" layoutY="60.0" prefHeight="303.0" prefWidth="181.0" spacing="15.0">
+         <children>
+            <TextField fx:id="firstName" promptText="Enter First Name" />
+            <TextField fx:id="lastName" promptText="Enter Last Name" />
+            <TextField fx:id="number" promptText="Player Number" />
+            <ComboBox fx:id="positionCombo" prefWidth="150.0" promptText="Position" />
+            <ComboBox fx:id="throwingArmCombo" prefWidth="150.0" promptText="Throwing Arm" />
+            <ComboBox fx:id="battingStanceCombo" prefWidth="150.0" promptText="Batting Stance" />
+            <ComboBox fx:id="teamCombo" prefWidth="150.0" promptText="Team Name" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

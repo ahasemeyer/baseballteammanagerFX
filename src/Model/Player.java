@@ -75,6 +75,23 @@ public class Player implements Serializable
         teamid = team; 
     }
     
+//    public static void deletePlayer(int playerID)
+//    {
+//        EntityManager em = DBUtil.getEM();
+//        System.out.println("Delete Player Started.");
+////        Query deletePlayerQuery = em.createQuery("DELETE Player FROM Player a WHERE a.playerid=?");
+////        deletePlayerQuery.setParameter(1, playerID);
+//        
+//        Query deletePlayerQuery = em.createQuery("DELETE FROM Player c WHERE c.playerid = :p");
+//        int deletedCount = deletePlayerQuery.setParameter("p", playerID).executeUpdate(); 
+//        //System.out.println("Delete Player Ended."+deletedCount);
+//        
+////        
+////    }Query lNameQuery = em.createNativeQuery("SELECT a.lname FROM player a WHERE a.playerID=?");
+////        lNameQuery.setParameter(1,inPlayerID);
+////        String inLname = (String)lNameQuery.getSingleResult();
+//    }
+    
     public static Player loadPlayerData(int inPlayerID)
     {
         EntityManager em = Model.DBUtil.getEM();
@@ -146,48 +163,6 @@ public class Player implements Serializable
     {
         position = inPosition;
     }
-    
-   
-//    
-//    public void setPlayerNumber(int inNumber)
-//    {
-//        playerNumber = inNumber;
-//    }
-//    
-//    public int getPlayerNumber()
-//    {
-//        return playerNumber;
-//    }
-//    
-//    public void setPlayerArm(String inArm)
-//    {
-//        throwingArm = inArm;
-//    }
-//    
-//    public String getPlayerArm()
-//    {
-//        return throwingArm;
-//    }
-    
-//    public void setPlayerStance(String inStance)
-//    {
-//        battingStance = inStance;
-//    }
-//    
-//    public String getPlayerStance()
-//    {
-//        return battingStance; 
-//    }
-//    
-//    public void setTeamID(int inTeamID)
-//    {
-//        teamID = inTeamID;
-//    }
-//    
-//    public int getTeamID()
-//    {
-//        return teamID; 
-//    }
 
     public Player(Integer playerid) {
         this.playerid = playerid;
@@ -239,30 +214,5 @@ public class Player implements Serializable
 
     public void setThrowingarm(String throwingarm) {
         this.throwingarm = throwingarm;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (playerid != null ? playerid.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Player)) {
-            return false;
-        }
-        Player other = (Player) object;
-        if ((this.playerid == null && other.playerid != null) || (this.playerid != null && !this.playerid.equals(other.playerid))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Data.Player[ playerid=" + playerid + " ]";
     }
 }

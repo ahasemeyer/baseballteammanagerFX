@@ -17,7 +17,6 @@
       </Label>
       <ComboBox fx:id="chooseTeamCombo" layoutX="250.0" layoutY="32.0" onAction="#handleChooseTeam" prefWidth="150.0" promptText="Choose Team" />
       <ComboBox fx:id="chooseHitterCombo" layoutX="417.0" layoutY="32.0" onAction="#handleChooseHitter" prefWidth="150.0" promptText="Choose Hitter" />
-      <Button fx:id="updateHitterButton" layoutX="495.0" layoutY="127.0" mnemonicParsing="false" onAction="#handleUpdateHitter" text="Update Hitter" />
       <Label layoutX="81.0" layoutY="76.0" text="H" />
       <Label layoutX="122.0" layoutY="76.0" text="2B" />
       <Label layoutX="165.0" layoutY="76.0" text="3B" />
@@ -29,6 +28,7 @@
       <Label layoutX="423.0" layoutY="76.0" text="CS" />
       <Label layoutX="466.0" layoutY="76.0" text="SB" />
       <Label layoutX="35.0" layoutY="76.0" text="AB" />
+      <Label layoutX="507.0" layoutY="76.0" text="RBI" />
       <Label fx:id="errorMessageLabel" layoutX="14.0" layoutY="119.0" prefHeight="40.0" prefWidth="481.0" textFill="#ff0404" />
       <HBox layoutX="23.0" layoutY="91.0" prefHeight="25.0" prefWidth="552.0">
          <children>
@@ -46,6 +46,6 @@
             <TextField fx:id="rbiText" prefHeight="25.0" prefWidth="43.0" text="0" />
          </children>
       </HBox>
-      <Label layoutX="507.0" layoutY="76.0" text="RBI" />
+      <Button fx:id="updateHitterButton" layoutX="495.0" layoutY="127.0" mnemonicParsing="false" onAction="#handleUpdateHitter" text="Update Hitter" />
    </children>
 </AnchorPane>

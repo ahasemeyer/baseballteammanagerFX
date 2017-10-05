@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="276.0" prefWidth="253.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LookupManagerPageController">
+   <children>
+      <TableView fx:id="table" layoutX="14.0" layoutY="68.0" prefHeight="200.0" prefWidth="222.0">
+        <columns>
+          <TableColumn fx:id="idCol" prefWidth="35.0" text="ID" />
+            <TableColumn fx:id="tidCol" prefWidth="35.0" text="Team" />
+          <TableColumn fx:id="wCol" prefWidth="35.0" text="W" />
+            <TableColumn fx:id="lCol" prefWidth="35.0" text="L" />
+            <TableColumn fx:id="tCol" prefWidth="35.0" text="T" />
+            <TableColumn fx:id="wpCol" prefWidth="50.0" text="W %" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -147,6 +147,18 @@ public class DBUtil
         }
     }
     
+    public static void deletePlayer(int playerID)
+    {
+        EntityManager em = DBUtil.getEM();
+        System.out.println("Delete Player Started.");   
+        em.getTransaction().begin();
+        Query deletePlayerQuery = em.createQuery("DELETE FROM Player c WHERE c.playerid = :p");
+        int deletedNumber = deletePlayerQuery.setParameter("p", playerID).executeUpdate();
+        em.getTransaction().commit();
+        em.close();
+        System.out.println("Delete Player Ended, "+deletedNumber+" records have been deleted.");
+    }
+    
     public static Player updatePlayer(Player p)
     {
         try {

@@ -5,27 +5,30 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?scenebuilder-stylesheet /CSS/mainmenu.css?>
 
-<AnchorPane id="AnchorPane" prefHeight="641.0" prefWidth="651.0" styleClass="anchorPane" stylesheets="@../CSS/mainmenu.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+<AnchorPane id="AnchorPane" prefHeight="630.0" prefWidth="651.0" styleClass="anchorPane" stylesheets="@../CSS/mainmenu.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
    <children>
-      <Pane layoutX="14.0" layoutY="8.0" prefHeight="70.0" prefWidth="314.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
+      <Pane layoutX="9.0" layoutY="14.0" prefHeight="74.0" prefWidth="325.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
          <children>
-            <Label layoutX="13.0" layoutY="16.0" styleClass="titleText" stylesheets="@../CSS/mainmenu.css" text="Baseball League Manager">
+            <Label layoutX="22.0" layoutY="19.0" styleClass="titleText" stylesheets="@../CSS/mainmenu.css" text="Baseball League Manager">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Pane layoutX="344.0" layoutY="17.0" prefHeight="224.0" prefWidth="288.0" styleClass="tablePane" stylesheets="@../CSS/mainmenu.css">
+      <Pane layoutX="344.0" layoutY="14.0" prefHeight="227.0" prefWidth="288.0" styleClass="tablePane" stylesheets="@../CSS/mainmenu.css">
          <children>
-            <Label layoutX="27.0" layoutY="14.0" text="League Standings" />
-            <TableView fx:id="lsTable" layoutX="14.0" layoutY="56.0" prefHeight="154.0" prefWidth="261.0">
+            <Label layoutX="14.0" layoutY="10.0" styleClass="sectionLabel" stylesheets="@../CSS/mainmenu.css" text="League Standings" />
+            <TableView fx:id="lsTable" layoutX="14.0" layoutY="56.0" prefHeight="154.0" prefWidth="261.0" stylesheets="@../CSS/mainmenu.css">
               <columns>
                 <TableColumn fx:id="lsteamCol" minWidth="70.0" prefWidth="90.0" text="Team" />
                 <TableColumn fx:id="lswCol" prefWidth="31.33331298828125" text="W" />
@@ -34,107 +37,200 @@
                   <TableColumn fx:id="lswpCol" prefWidth="57.0" text="W %" />
               </columns>
             </TableView>
-            <Button fx:id="lsRefresh" layoutX="198.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlelsRefresh" text="Refresh" />
+            <Button fx:id="lsRefresh" layoutX="198.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlelsRefresh" stylesheets="@../CSS/mainmenu.css" text="Refresh" />
          </children>
       </Pane>
-      <Pane layoutX="344.0" layoutY="259.0" prefHeight="369.0" prefWidth="288.0" styleClass="tablePane" stylesheets="@../CSS/mainmenu.css">
+      <Pane layoutX="344.0" layoutY="249.0" prefHeight="369.0" prefWidth="288.0" styleClass="tablePane" stylesheets="@../CSS/mainmenu.css">
          <children>
-            <Button layoutX="32.0" layoutY="44.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Hitters" />
-            <Button layoutX="144.0" layoutY="44.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Pitchers" />
-            <Label layoutX="25.0" layoutY="14.0" text="League Leaders" />
+            <Button layoutX="32.0" layoutY="44.0" mnemonicParsing="false" onAction="#handleTopHitters" prefHeight="25.0" prefWidth="106.0" styleClass="leaderHitterBtn" stylesheets="@../CSS/mainmenu.css" text="Hitters" />
+            <Button layoutX="144.0" layoutY="44.0" mnemonicParsing="false" onAction="#handleTopPitchers" prefHeight="25.0" prefWidth="106.0" styleClass="leaderPitcherBtn" stylesheets="@../CSS/mainmenu.css" text="Pitchers" />
+            <Label layoutX="14.0" layoutY="14.0" styleClass="sectionLabel" stylesheets="@../CSS/mainmenu.css" text="League Leaders" />
             <VBox layoutX="66.0" layoutY="70.0" prefHeight="63.0" prefWidth="185.0">
                <children>
-                  <Label fx:id="topAvgNamelbl" prefHeight="32.0" prefWidth="186.0" text="LAST NAME, FIRST NAME" />
+                  <Label fx:id="topAvgNamelbl" prefHeight="32.0" prefWidth="186.0" styleClass="leaderName" stylesheets="@../CSS/mainmenu.css" text="LAST NAME, FIRST NAME">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <HBox prefHeight="31.0" prefWidth="185.0">
                      <children>
-                        <Label fx:id="topAvgTeamlbl" prefHeight="31.0" prefWidth="99.0" text="TEAM" />
-                        <Label fx:id="topAvglbl" prefHeight="31.0" prefWidth="120.0" text="AVERAGE" />
+                        <Label fx:id="topAvgTeamlbl" prefHeight="31.0" prefWidth="99.0" stylesheets="@../CSS/mainmenu.css" text="TEAM">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <Label fx:id="topAvglbl" prefHeight="31.0" prefWidth="120.0" stylesheets="@../CSS/mainmenu.css" text="AVERAGE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <Label fx:id="avglbl" layoutX="20.0" layoutY="86.0" prefHeight="32.0" prefWidth="43.0" rotate="270.0" text="AVG">
+            <Label fx:id="avglbl" layoutX="20.0" layoutY="86.0" prefHeight="32.0" prefWidth="43.0" rotate="270.0" styleClass="leaderLabel" stylesheets="@../CSS/mainmenu.css" text="AVG">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
             <VBox layoutX="66.0" layoutY="140.0" prefHeight="63.0" prefWidth="185.0">
                <children>
-                  <Label prefHeight="32.0" prefWidth="186.0" text="LAST NAME, FIRST NAME" />
+                  <Label fx:id="topHRNamelbl" prefHeight="32.0" prefWidth="186.0" styleClass="leaderName" stylesheets="@../CSS/mainmenu.css" text="LAST NAME, FIRST NAME">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <HBox prefHeight="31.0" prefWidth="185.0">
                      <children>
-                        <Label prefHeight="31.0" prefWidth="99.0" text="TEAM" />
-                        <Label prefHeight="31.0" prefWidth="120.0" text="HR" />
+                        <Label fx:id="topHRTeamlbl" prefHeight="31.0" prefWidth="99.0" stylesheets="@../CSS/mainmenu.css" text="TEAM">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <Label fx:id="topHRlbl" prefHeight="31.0" prefWidth="120.0" stylesheets="@../CSS/mainmenu.css" text="HR">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <Label layoutX="20.0" layoutY="156.0" prefHeight="32.0" prefWidth="43.0" rotate="270.0" text="HR">
+            <Label fx:id="hrlbl" layoutX="20.0" layoutY="156.0" prefHeight="32.0" prefWidth="43.0" rotate="270.0" styleClass="leaderLabel" stylesheets="@../CSS/mainmenu.css" text="HR">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
             <VBox layoutX="66.0" layoutY="214.0" prefHeight="63.0" prefWidth="185.0">
                <children>
-                  <Label prefHeight="32.0" prefWidth="186.0" text="LAST NAME, FIRST NAME" />
+                  <Label fx:id="topRBINamelbl" prefHeight="32.0" prefWidth="186.0" styleClass="leaderName" stylesheets="@../CSS/mainmenu.css" text="LAST NAME, FIRST NAME">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <HBox prefHeight="31.0" prefWidth="185.0">
                      <children>
-                        <Label prefHeight="31.0" prefWidth="99.0" text="TEAM" />
-                        <Label prefHeight="31.0" prefWidth="120.0" text="RBI" />
+                        <Label fx:id="topRBITeamlbl" prefHeight="31.0" prefWidth="99.0" stylesheets="@../CSS/mainmenu.css" text="TEAM">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <Label fx:id="topRBIlbl" prefHeight="31.0" prefWidth="120.0" stylesheets="@../CSS/mainmenu.css" text="RBI">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <Label layoutX="20.0" layoutY="230.0" prefHeight="32.0" prefWidth="43.0" rotate="270.0" text="RBI">
+            <Label fx:id="rbilbl" layoutX="20.0" layoutY="230.0" prefHeight="32.0" prefWidth="43.0" rotate="270.0" styleClass="leaderLabel" stylesheets="@../CSS/mainmenu.css" text="RBI">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
             <VBox layoutX="66.0" layoutY="292.0" prefHeight="63.0" prefWidth="185.0">
                <children>
-                  <Label prefHeight="32.0" prefWidth="186.0" text="LAST NAME, FIRST NAME" />
+                  <Label fx:id="topSBNamelbl" prefHeight="32.0" prefWidth="186.0" styleClass="leaderName" stylesheets="@../CSS/mainmenu.css" text="LAST NAME, FIRST NAME">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <HBox prefHeight="31.0" prefWidth="185.0">
                      <children>
-                        <Label prefHeight="31.0" prefWidth="99.0" text="TEAM" />
-                        <Label prefHeight="31.0" prefWidth="120.0" text="SB" />
+                        <Label fx:id="topSBTeamlbl" prefHeight="31.0" prefWidth="99.0" stylesheets="@../CSS/mainmenu.css" text="TEAM">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <Label fx:id="topSBlbl" prefHeight="31.0" prefWidth="120.0" stylesheets="@../CSS/mainmenu.css" text="SB">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <Label layoutX="20.0" layoutY="308.0" prefHeight="32.0" prefWidth="43.0" rotate="270.0" text="SB">
+            <Label fx:id="sblbl" layoutX="20.0" layoutY="308.0" prefHeight="32.0" prefWidth="43.0" rotate="270.0" styleClass="leaderLabel" stylesheets="@../CSS/mainmenu.css" text="SB">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Pane layoutX="26.0" layoutY="91.0" prefHeight="84.0" prefWidth="297.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
+      <VBox layoutX="9.0" layoutY="92.0" prefHeight="473.0" prefWidth="325.0" spacing="3.0">
          <children>
-            <Label layoutX="7.0" layoutY="6.0" text="Create!" />
-            <Button fx:id="createTeamButton" layoutX="37.0" layoutY="31.0" mnemonicParsing="false" onAction="#handleTeamButton" prefHeight="25.0" prefWidth="86.0" text="Create Team" />
-            <Button fx:id="createPlayerButton" layoutX="169.0" layoutY="30.0" mnemonicParsing="false" onAction="#handlePlayerButton" text="Create Player" />
+            <Pane prefHeight="84.0" prefWidth="297.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
+               <children>
+                  <Label layoutX="-2.0" layoutY="30.0" rotate="270.0" styleClass="sectionLabel" stylesheets="@../CSS/mainmenu.css" text="Create!" />
+                  <GridPane layoutX="50.0" layoutY="11.0" prefHeight="63.0" prefWidth="261.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="createTeamButton" mnemonicParsing="false" onAction="#handleTeamButton" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Create Team" />
+                        <Button fx:id="createPlayerButton" mnemonicParsing="false" onAction="#handlePlayerButton" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Create Player" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
+               </children>
+            </Pane>
+            <Pane prefHeight="118.0" prefWidth="325.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
+               <children>
+                  <Label layoutX="-4.0" layoutY="47.0" rotate="270.0" styleClass="sectionLabel" stylesheets="@../CSS/mainmenu.css" text="Update!" />
+                  <GridPane layoutX="50.0" layoutY="12.0" prefHeight="95.0" prefWidth="261.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="updateHitterButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleUpdateHitter" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Update Hitter" />
+                        <Button fx:id="updateTeamButton" mnemonicParsing="false" onAction="#handleUpdateTeam" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Update Team" GridPane.columnIndex="1" />
+                        <Button fx:id="updateManagerButton" mnemonicParsing="false" onAction="#handleUpdateManager" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Update Manager" GridPane.rowIndex="1" />
+                        <Button fx:id="updatePitcherButton" mnemonicParsing="false" onAction="#handleUpdatePitcher" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Update Pitcher" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+               </children>
+            </Pane>
+            <Pane prefHeight="182.0" prefWidth="325.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
+               <children>
+                  <Label layoutX="-4.0" layoutY="78.0" rotate="270.0" styleClass="sectionLabel" stylesheets="@../CSS/mainmenu.css" text="Lookup!" />
+                  <GridPane layoutX="50.0" layoutY="17.0" prefHeight="146.0" prefWidth="261.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="lookupHittersButton" mnemonicParsing="false" onAction="#handleLookupHitters" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Hitters" />
+                        <Button fx:id="lookupPitcherButton" mnemonicParsing="false" onAction="#handleLookupPitchers" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Pitchers" GridPane.columnIndex="1" />
+                        <Button fx:id="lookupPlayersButton" mnemonicParsing="false" onAction="#handleLookupPlayers" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Players" GridPane.rowIndex="1" />
+                        <Button mnemonicParsing="false" onAction="#handleLookupManager" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Manager" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Teams" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" onAction="#handleIndivPlayer" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Individual Player" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+               </children>
+            </Pane>
+            <Pane prefHeight="83.0" prefWidth="325.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
+               <children>
+                  <Label layoutX="9.0" layoutY="29.0" rotate="270.0" styleClass="sectionLabel" stylesheets="@../CSS/mainmenu.css" text="Edit!" />
+                  <GridPane layoutX="50.0" layoutY="8.0" prefHeight="74.0" prefWidth="261.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="updatePlayerButton" mnemonicParsing="false" onAction="#handleUpdatePlayer" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Edit Player" />
+                        <Button mnemonicParsing="false" onAction="#handleDeletePlayer" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Delete Player" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
+               </children>
+            </Pane>
          </children>
-      </Pane>
-      <Pane layoutX="26.0" layoutY="183.0" prefHeight="138.0" prefWidth="297.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
-         <children>
-            <Label layoutX="7.0" layoutY="6.0" text="Update!" />
-            <Button fx:id="updatePlayerButton" layoutX="41.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleUpdatePlayer" text="Update Player" />
-            <Button fx:id="updateHitterButton" layoutX="176.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleUpdateHitter" text="Update Hitter" />
-            <Button fx:id="updatePitcherButton" layoutX="39.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleUpdatePitcher" text="Update Pitcher" />
-            <Button fx:id="updateTeamButton" layoutX="176.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleUpdateTeam" text="Update Team" />
-            <Button fx:id="updateManagerButton" layoutX="41.0" layoutY="99.0" mnemonicParsing="false" onAction="#handleUpdateManager" text="Update Manager" />
-         </children>
-      </Pane>
-      <Pane layoutX="26.0" layoutY="333.0" prefHeight="129.0" prefWidth="297.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
-         <children>
-            <Label layoutX="7.0" layoutY="6.0" text="Lookup!" />
-            <Button fx:id="lookupPlayersButton" layoutX="42.0" layoutY="71.0" mnemonicParsing="false" onAction="#handleLookupPlayers" text="Lookup Players" />
-            <Button fx:id="lookupPitcherButton" layoutX="176.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleLookupPitchers" text="Lookup Pitchers" />
-            <Button fx:id="lookupHittersButton" layoutX="43.0" layoutY="33.0" mnemonicParsing="false" onAction="#handleLookupHitters" text="Lookup Hitters" />
-            <Button layoutX="176.0" layoutY="71.0" mnemonicParsing="false" text="Lookup Manager" />
-         </children>
-      </Pane>
-      <Button fx:id="lookupPlayerIDButton" layoutX="54.0" layoutY="581.0" mnemonicParsing="false" onAction="#handleLookupPlayerID" prefHeight="46.0" prefWidth="101.0" text="Lookup Player by ID" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="lookupPlayerNameButton" layoutX="155.0" layoutY="581.0" mnemonicParsing="false" onAction="#handleLookupPlayerName" prefHeight="46.0" prefWidth="101.0" text="Lookup Player by Name" textAlignment="CENTER" wrapText="true" />
+      </VBox>
    </children>
 </AnchorPane>

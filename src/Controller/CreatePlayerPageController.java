@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Player;
+import java.io.File;
+import java.io.IOException;
 import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -8,10 +10,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import java.util.List;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -27,8 +34,24 @@ public class CreatePlayerPageController implements Initializable {
     @FXML private ComboBox<String> battingStanceCombo;
     @FXML private ComboBox<String> positionCombo;
     @FXML private ComboBox<String> throwingArmCombo;
-    @FXML private Label errorMessageLabel; 
+    @FXML private Label errorMessageLabel;
+    @FXML private ImageView profilePicture; 
+    private Image image = null; 
 
+    @FXML 
+    void handlePicture(ActionEvent event)
+    {
+        FileChooser fileChooser = new FileChooser(); 
+        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)","*.JPG");
+        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)","*.PNG");
+        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+        
+        File file = fileChooser.showOpenDialog(null);
+        image = new Image(file.toURI().toString());
+//        System.out.println(file); 
+        profilePicture.setImage(image);
+    }
+    
     @FXML
     boolean handleHitterRadio(ActionEvent event)
     {
@@ -187,8 +210,18 @@ public class CreatePlayerPageController implements Initializable {
             String managerMessage = ", Manager";
             confirmMessage += managerMessage;
             Model.DBUtil.createManager(newPlayer.getPlayerid());
-        }     
+        } 
         
+        if(image != null)
+        {
+            File newfile = new File("src/images/profile/"+newPlayer.getPlayerid()+".png"); 
+            try{
+                ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", newfile);
+            }catch(IOException ex){
+                System.out.println(ex);
+            }
+        }
+
         playerID = newPlayer.getPlayerid();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Player Created");
@@ -203,6 +236,8 @@ public class CreatePlayerPageController implements Initializable {
     {
         assert teamCombo != null;
         teamCombo.getItems().clear();
+        File newfile = new File("src/images/defaultProfile.jpg"); 
+        image = new Image(newfile.toURI().toString());
         
         EntityManager em = Model.DBUtil.getEM();
         

@@ -9,19 +9,108 @@ and open the template in the editor.
 */
 
 .buttonPane {
-    -fx-background-color: white; 
+    -fx-background-color: rgba(217,217,217,0.9);
+    -fx-background-radius: 2;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
 }
 
+
 .anchorPane {
-  /*-fx-background-image: url("/images/holeBkgLight.png");*/
-  -fx-background-color: lightGray;
+  -fx-background-image: url("/images/dirt.jpg"); 
 }
 
 .tablePane {
-    -fx-background-color: white;
+    -fx-background-radius: 2;
+    -fx-background-insets: 0,1,1;
+    -fx-text-fill: black;
+    -fx-background-color: rgba(217,217,217,0.9);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
 }
 
 .titleText {
-    -fx-background-color: blue; 
-    -fx-text-fill: red; 
+    -fx-font-family: "Impact";
+    -fx-font-weight: bold;
+    -fx-font-size: 2.2em;
+    -fx-text-fill: linear-gradient(#426ab7, #263e75);
+    -fx-effect: dropshadow(gaussian, darkgray, 10, 0, 0, 0);
+}
+
+.btn {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-text-fill: rgba(217,217,217);
+    -fx-font-size: 12px;
+    -fx-font-family: "Impact";
+    -fx-font-weight: bold;
+}
+
+.btn:hover {
+    -fx-background-color: 
+        #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+}
+
+.sectionLabel {  
+    -fx-font-family: "Impact";
+    -fx-font-weight: bold;
+    -fx-font-size: 1.6em;
+    -fx-text-fill: linear-gradient(#426ab7, #263e75);   
+    -fx-effect: dropshadow(one-pass-box, darkgray, 5, 0, 0, 0);       
+}
+
+.leaderName {
+    -fx-border-style: solid; 
+    -fx-border-width: 0 0 1 0; 
+    -fx-border-color: #263e75;
+    -fx-text-weight: bold;
+}
+
+.leaderLabel {
+    -fx-font-family: "Impact";
+    -fx-font-weight: bold;
+    -fx-font-size: 2.1em;
+    -fx-effect: dropshadow(one-pass-box, darkgray, 5, 0, 0, 0);
+    -fx-text-fill: linear-gradient(#426ab7, #263e75);    
+    -fx-border-style: solid;
+    -fx-border-color: #263e75;
+    -fx-border-width: 0 0 3 0; 
+}
+
+.table-view {
+    -fx-background-color:transparent;
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);    
+}
+
+.table-view .scroll-bar:vertical{
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);    
+}
+
+.table-view .column-header{
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+}
+
+.table-view .column-header .label{
+    -fx-text-fill:white; 
 }

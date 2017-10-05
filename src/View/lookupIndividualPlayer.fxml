@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="224.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LookupIndividualPlayerController">
+   <children>
+      <HBox layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="407.0" spacing="5.0">
+         <children>
+            <ComboBox fx:id="typeCombo" onAction="#handleType" prefWidth="150.0" promptText="Player Type" />
+            <ComboBox fx:id="teamCombo" onAction="#handleTeam" prefWidth="150.0" promptText="Select Team" />
+            <ComboBox fx:id="playerCombo" onAction="#handlePlayer" prefWidth="150.0" promptText="Select Player" />
+         </children>
+      </HBox>
+      <Button layoutX="435.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleLookup" text="Lookup" />
+      <TableView layoutX="175.0" layoutY="134.0" prefHeight="70.0" prefWidth="417.0">
+        <columns>
+          <TableColumn prefWidth="51.0" text="C1" />
+          <TableColumn prefWidth="49.0" text="C2" />
+        </columns>
+      </TableView>
+      <ImageView fx:id="profilePicture" fitHeight="150.0" fitWidth="133.0" layoutX="25.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/defaultProfile.jpg" />
+         </image>
+      </ImageView>
+      <FlowPane layoutX="175.0" layoutY="57.0" prefHeight="49.0" prefWidth="351.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="50.0" text="Name:" />
+            <Label fx:id="playerNamelbl" prefHeight="17.0" prefWidth="169.0" />
+            <Label prefHeight="17.0" prefWidth="62.0" text="Player ID:" />
+            <Label fx:id="playerIDlbl" prefHeight="17.0" prefWidth="55.0" />
+            <Label prefHeight="17.0" prefWidth="52.0" text="Team: " />
+            <Label fx:id="teamNamelbl" prefHeight="17.0" prefWidth="167.0" />
+            <Label prefHeight="17.0" prefWidth="65.0" text="Position:" />
+            <Label fx:id="positionlbl" prefHeight="17.0" prefWidth="55.0" />
+         </children>
+      </FlowPane>
+   </children>
+</AnchorPane>

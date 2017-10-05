@@ -12,10 +12,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 
 /**
@@ -35,6 +40,20 @@ public class LookupPlayersPageController implements Initializable {
     @FXML private TableColumn<PlayerFX, String> stanceCol;
     @FXML private TableColumn<PlayerFX, Number> teamIDCol;
     @FXML private TableView<PlayerFX> table;
+
+    @FXML
+    private void handlePrint(ActionEvent event)
+    {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/lookupPlayerPrint.fxml"));
+            Parent root1 = (Parent)fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            Util.printerUtil.printLandscape(root1);
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) 
