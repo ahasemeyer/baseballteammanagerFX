@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -86,23 +87,27 @@ public class UpdateTeamPageController implements Initializable
         
         if(teamEntered && winsEntered && lossesEntered && tiesEntered)
         {
+            //update team data
             errorMessage = ""; 
+            errorMessageLabel.setText(errorMessage);
             Team team1 = new Team(teamID);
             team1 = Team.loadTeamData(teamID);
             team1.updateTeam(inWins, inLosses, inTies);
             team1.setName(selectedItem);
             Model.DBUtil.updateTeam(team1);
             
-            try{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/updatePlayerConfirmWindow.fxml"));
-                Parent root1 = (Parent)fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.setTitle("Team Updated!");
-                stage.setScene(new Scene(root1));
-                stage.show();
-            }catch(Exception e){
-                System.out.println("Cant load new window");
-            }     
+            //popup confirm window
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Team Updated");
+            alert.setHeaderText(null);
+            alert.setContentText("You have successfully updated "+team1.getTeamName()+".");
+            alert.showAndWait();
+            
+            //reset values
+            winsText.setText("0");
+            lossesText.setText("0");
+            tiesText.setText("0");
+            chooseTeamCombo.getSelectionModel().clearSelection();
         }
         errorMessageLabel.setText(errorMessage);
     }

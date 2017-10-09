@@ -42,20 +42,11 @@ public class LookupManagerPageController implements Initializable
     {
         EntityManager em = Model.DBUtil.getEM();
         data = FXCollections.observableArrayList();
-        
         List<Manager>lst = em.createQuery("SELECT c FROM Manager c").getResultList();
         for(Manager lst1 : lst)
         {
             data.add(new ManagerFX(lst1.getPlayerID(), lst1.getTeamID(), lst1.getWins(), lst1.getLosses(), lst1.getTies(), lst1.getWinPerc()));
         }
-        
-//        for(Hitter lst1 : lst)
-//        {
-//            data.add(new HitterFX(lst1.getPlayerID(), lst1.getAtbats(), lst1.getBB(), lst1.getBattingAvg(), lst1.getCaughtStealing(), 
-//            lst1.getDoubles(), lst1.getHBP(), lst1.getOBP(), lst1.getSacFly(), lst1.getSlugging(), lst1.getStealingPerc(),
-//            lst1.getStolenBases(), lst1.getStrikeouts(), lst1.getTotalBases(), lst1.getTriples(), lst1.getHits(), lst1.getHomeruns(), lst1.getRBI()));
-//        }
-
         table.setItems(data);
         table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
         idCol.setCellValueFactory(cell -> cell.getValue().getPlayerIDProperty());
@@ -63,9 +54,7 @@ public class LookupManagerPageController implements Initializable
         wCol.setCellValueFactory(cell -> cell.getValue().getWinsProperty());
         lCol.setCellValueFactory(cell -> cell.getValue().getLossesProperty());
         tCol.setCellValueFactory(cell -> cell.getValue().getTiesProperty());
-        wpCol.setCellValueFactory(cell -> Bindings.format("%.3f", cell.getValue().getWinPercProperty()));
-        
-        
+        wpCol.setCellValueFactory(cell -> Bindings.format("%.3f", cell.getValue().getWinPercProperty())); 
     }    
     
 }

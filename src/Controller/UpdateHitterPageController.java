@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -58,10 +59,13 @@ public class UpdateHitterPageController implements Initializable {
             rbiEntered = true;
         String errorMessage = "Please fill out missing fields: ";
         Hitter hitter1;
+        String fullName = "";
         
         try{
             String selectedItem = chooseHitterCombo.getSelectionModel().getSelectedItem();; 
             String[] tokens = selectedItem.split(":");
+            String[] nameTokens = selectedItem.split(" "); 
+            fullName = nameTokens[0]+" "+nameTokens[1];
             selectedPlayer = Integer.parseInt(tokens[1]);
 
             try{
@@ -158,11 +162,34 @@ public class UpdateHitterPageController implements Initializable {
         {
             errorMessage = "";
             
+            //Perform update
             hitter1 = new Hitter(selectedPlayer);
             hitter1 = Hitter.loadHitterData(selectedPlayer);
             hitter1.updateHitter(inAB, inH, inB2, inB3, inHR, inBB, inHBP, inSac, inSO, inCS, inSB, inRBI);
             Model.DBUtil.updateHitter(hitter1);
             
+            //confirmation window
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Hitter Updated");
+            alert.setHeaderText(null);
+            alert.setContentText("You have successfully updated "+fullName+".");
+            alert.showAndWait();
+            
+            //reset values
+            abText.setText("0");
+            soText.setText("0");
+            csText.setText("0");
+            sbText.setText("0");
+            sacsText.setText("0");
+            hbpText.setText("0");
+            bbText.setText("0");
+            hrText.setText("0");
+            b3Text.setText("0");
+            b2Text.setText("0");
+            hText.setText("0");
+            rbiText.setText("0");
+            chooseTeamCombo.getSelectionModel().clearSelection();
+            chooseHitterCombo.getSelectionModel().clearSelection();    
         }
         
         errorMessageLabel.setText(errorMessage);
@@ -177,60 +204,64 @@ public class UpdateHitterPageController implements Initializable {
         EntityManager em = Model.DBUtil.getEM();
 
         String selectedTeam = chooseTeamCombo.getSelectionModel().getSelectedItem();
+        
+        try{
+            Query teamIDQuery = em.createNativeQuery("SELECT teamid FROM team WHERE teamname=?");
+            teamIDQuery.setParameter(1,selectedTeam);
+            int teamID = (int)teamIDQuery.getSingleResult();
 
-        Query teamIDQuery = em.createNativeQuery("SELECT teamid FROM team WHERE teamname=?");
-        teamIDQuery.setParameter(1,selectedTeam);
-        int teamID = (int)teamIDQuery.getSingleResult();
-        
-        Query playerIDSQL = em.createNativeQuery("SELECT playerid FROM player WHERE teamid=?");
-        playerIDSQL.setParameter(1,teamID);
-        List<Integer>playerIDList = playerIDSQL.getResultList();
-        
-        Query hitterIDSQL = em.createNativeQuery("SELECT playerid FROM hitter");
-        List<Integer>hitterIDList = hitterIDSQL.getResultList();
-        
-        counter = 0; 
-        int[] playerIDArray = new int[playerIDList.size()];
-        playerIDList.forEach((data) -> {
-            playerIDArray[counter]=data;
-            counter++;
-        });
-        
-        counter = 0; 
-        int[] hitterIDArray = new int[hitterIDList.size()];
-        hitterIDList.forEach((data) -> {
-            hitterIDArray[counter]=data;
-            counter++;
-        });
-        
-        int counter1 = 0;
-        int[] actualHitterID = new int[playerIDList.size()];
-        for(int i=0; i<playerIDList.size(); i++)
-        {
-            for(int j=0; j<hitterIDList.size(); j++)
+            Query playerIDSQL = em.createNativeQuery("SELECT playerid FROM player WHERE teamid=?");
+            playerIDSQL.setParameter(1,teamID);
+            List<Integer>playerIDList = playerIDSQL.getResultList();
+
+            Query hitterIDSQL = em.createNativeQuery("SELECT playerid FROM hitter");
+            List<Integer>hitterIDList = hitterIDSQL.getResultList();
+
+            counter = 0; 
+            int[] playerIDArray = new int[playerIDList.size()];
+            playerIDList.forEach((data) -> {
+                playerIDArray[counter]=data;
+                counter++;
+            });
+
+            counter = 0; 
+            int[] hitterIDArray = new int[hitterIDList.size()];
+            hitterIDList.forEach((data) -> {
+                hitterIDArray[counter]=data;
+                counter++;
+            });
+
+            int counter1 = 0;
+            int[] actualHitterID = new int[playerIDList.size()];
+            for(int i=0; i<playerIDList.size(); i++)
             {
-                if(playerIDArray[i]==hitterIDArray[j])
+                for(int j=0; j<hitterIDList.size(); j++)
                 {
-                    actualHitterID[counter1] = playerIDArray[i];
-                    counter1++;
+                    if(playerIDArray[i]==hitterIDArray[j])
+                    {
+                        actualHitterID[counter1] = playerIDArray[i];
+                        counter1++;
+                    }
                 }
             }
+
+            chooseHitterCombo.getItems().clear(); 
+            for(int i=0; i<counter1;i++)
+            {
+                Query playerFName = em.createNativeQuery("SELECT fname FROM player WHERE playerid=?");
+                playerFName.setParameter(1,actualHitterID[i]);
+                String fName = (String)playerFName.getSingleResult();
+
+                Query playerLName = em.createNativeQuery("SELECT lname FROM player WHERE playerid=?");
+                playerLName.setParameter(1,actualHitterID[i]);
+                String lName = (String)playerLName.getSingleResult();
+
+                chooseHitterCombo.getItems().add(lName+", "+fName+"      ID:"+actualHitterID[i]);
+            }
+        }catch(Exception e){
+            System.out.println("Select a team");
         }
-         
-        chooseHitterCombo.getItems().clear(); 
-        for(int i=0; i<counter1;i++)
-        {
-            Query playerFName = em.createNativeQuery("SELECT fname FROM player WHERE playerid=?");
-            playerFName.setParameter(1,actualHitterID[i]);
-            String fName = (String)playerFName.getSingleResult();
             
-            Query playerLName = em.createNativeQuery("SELECT lname FROM player WHERE playerid=?");
-            playerLName.setParameter(1,actualHitterID[i]);
-            String lName = (String)playerLName.getSingleResult();
-            
-            chooseHitterCombo.getItems().add(lName+", "+fName+"      ID:"+actualHitterID[i]);
-            
-        }
     } 
     
 

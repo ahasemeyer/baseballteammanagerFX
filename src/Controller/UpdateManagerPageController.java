@@ -6,15 +6,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -33,6 +30,7 @@ public class UpdateManagerPageController implements Initializable {
     @FXML private TextField tiesText;
     @FXML private TextField lossesText;
     @FXML private Label errorMessageLabel; 
+    private String fullName = "";
 
     @FXML
     void handleChooseManager(ActionEvent event) {}
@@ -44,58 +42,63 @@ public class UpdateManagerPageController implements Initializable {
         
         String selectedTeam = chooseTeamCombo.getSelectionModel().getSelectedItem();
         
-        Query teamIDQuery = em.createNativeQuery("SELECT teamid FROM team WHERE teamname=?");
-        teamIDQuery.setParameter(1,selectedTeam);
-        int teamID = (int)teamIDQuery.getSingleResult();
+        try{
+            Query teamIDQuery = em.createNativeQuery("SELECT teamid FROM team WHERE teamname=?");
+            teamIDQuery.setParameter(1,selectedTeam);
+            int teamID = (int)teamIDQuery.getSingleResult();
         
-        Query playerIDSQL = em.createNativeQuery("SELECT playerid FROM player WHERE teamid=?");
-        playerIDSQL.setParameter(1,teamID);
-        List<Integer>playerIDList = playerIDSQL.getResultList();
-        
-        Query managerIDSQL = em.createNativeQuery("SELECT playerid FROM manager");
-        List<Integer>managerIDList = managerIDSQL.getResultList();
-        
-        counter = 0; 
-        int[] playerIDArray = new int[playerIDList.size()];
-        playerIDList.forEach((data) -> {
-            playerIDArray[counter]=data;
-            counter++;
-        });
-        
-        counter = 0; 
-        int[] managerIDArray = new int[managerIDList.size()];
-        managerIDList.forEach((data) -> {
-            managerIDArray[counter]=data;
-            counter++;
-        });
-        
-        int counter1 = 0;
-        int[] actualManagerID = new int[playerIDList.size()];
-        for(int i=0; i<playerIDList.size(); i++)
-        {
-            for(int j=0; j<managerIDList.size(); j++)
+            Query playerIDSQL = em.createNativeQuery("SELECT playerid FROM player WHERE teamid=?");
+            playerIDSQL.setParameter(1,teamID);
+            List<Integer>playerIDList = playerIDSQL.getResultList();
+
+            Query managerIDSQL = em.createNativeQuery("SELECT playerid FROM manager");
+            List<Integer>managerIDList = managerIDSQL.getResultList();
+
+            counter = 0; 
+            int[] playerIDArray = new int[playerIDList.size()];
+            playerIDList.forEach((data) -> {
+                playerIDArray[counter]=data;
+                counter++;
+            });
+
+            counter = 0; 
+            int[] managerIDArray = new int[managerIDList.size()];
+            managerIDList.forEach((data) -> {
+                managerIDArray[counter]=data;
+                counter++;
+            });
+
+            int counter1 = 0;
+            int[] actualManagerID = new int[playerIDList.size()];
+            for(int i=0; i<playerIDList.size(); i++)
             {
-                if(playerIDArray[i]==managerIDArray[j])
+                for(int j=0; j<managerIDList.size(); j++)
                 {
-                    actualManagerID[counter1] = playerIDArray[i];
-                    counter1++;
+                    if(playerIDArray[i]==managerIDArray[j])
+                    {
+                        actualManagerID[counter1] = playerIDArray[i];
+                        counter1++;
+                    }
                 }
             }
+
+            chooseManagerCombo.getItems().clear(); 
+            for(int i=0; i<counter1;i++)
+            {
+                Query playerFName = em.createNativeQuery("SELECT fname FROM player WHERE playerid=?");
+                playerFName.setParameter(1,actualManagerID[i]);
+                String fName = (String)playerFName.getSingleResult();
+
+                Query playerLName = em.createNativeQuery("SELECT lname FROM player WHERE playerid=?");
+                playerLName.setParameter(1,actualManagerID[i]);
+                String lName = (String)playerLName.getSingleResult();
+
+                chooseManagerCombo.getItems().add(lName+", "+fName+"      ID:"+actualManagerID[i]);
+            }
+        }catch(Exception e){
+            System.out.println("Select Manager");
         }
-         
-        chooseManagerCombo.getItems().clear(); 
-        for(int i=0; i<counter1;i++)
-        {
-            Query playerFName = em.createNativeQuery("SELECT fname FROM player WHERE playerid=?");
-            playerFName.setParameter(1,actualManagerID[i]);
-            String fName = (String)playerFName.getSingleResult();
             
-            Query playerLName = em.createNativeQuery("SELECT lname FROM player WHERE playerid=?");
-            playerLName.setParameter(1,actualManagerID[i]);
-            String lName = (String)playerLName.getSingleResult();
-            
-            chooseManagerCombo.getItems().add(lName+", "+fName+"      ID:"+actualManagerID[i]);
-        }
     }
 
     @FXML
@@ -115,6 +118,9 @@ public class UpdateManagerPageController implements Initializable {
         {
             String[] tokens = selectedItem.split(":");
             playerID = Integer.parseInt(tokens[1]);
+            
+            String[] nameTokens = selectedItem.split(" ");
+            fullName = nameTokens[0]+" "+nameTokens[1];
             
             try{
                 inWins = Integer.parseInt(winsText.getText());
@@ -140,22 +146,27 @@ public class UpdateManagerPageController implements Initializable {
         
         if(pEntered && wEntered && lEntered && tEntered)
         {
+            //update manager data
             errorMessage = "";
+            errorMessageLabel.setText(errorMessage);
             Manager manager1 = new Manager(playerID);
             manager1 = Manager.loadManagerData(playerID);
             manager1.updateManager(inWins, inLosses, inTies);
             Model.DBUtil.updateManager(manager1);
             
-            try{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/updatePlayerConfirmWindow.fxml"));
-                Parent root1 = (Parent)fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.setTitle("Manager Updated!");
-                stage.setScene(new Scene(root1));
-                stage.show();
-            }catch(Exception e){
-                System.out.println("Cant load new window");
-            } 
+            //confirm window
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Manager Updated");
+            alert.setHeaderText(null);
+            alert.setContentText("You have successfully updated "+fullName+".");
+            alert.showAndWait();
+            
+            //reset values
+            winsText.setText("0");
+            lossesText.setText("0");
+            tiesText.setText("0");
+            chooseTeamCombo.getSelectionModel().clearSelection();
+            chooseManagerCombo.getSelectionModel().clearSelection();
         }
         errorMessageLabel.setText(errorMessage);
     }

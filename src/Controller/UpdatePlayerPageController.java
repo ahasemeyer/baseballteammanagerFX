@@ -6,21 +6,28 @@
 package Controller;
 
 import Model.Player;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -38,7 +45,6 @@ public class UpdatePlayerPageController implements Initializable {
     @FXML private ComboBox<String> armCombo;
     @FXML private ComboBox<String> choosePlayerCombo;
     @FXML private ComboBox<String> stanceCombo;
-    @FXML private Button updatePlayerButton;
     @FXML private TextField firstNameText;
     @FXML private TextField lastNameText;
     @FXML private TextField playerNumberText;
@@ -46,10 +52,25 @@ public class UpdatePlayerPageController implements Initializable {
     @FXML private CheckBox hitterCheck;
     @FXML private CheckBox managerCheck;
     @FXML private Label errorMessageLabel; 
+    @FXML private ImageView profilePicture; 
+    private Image image = null; 
     private boolean isPitcher = false;
     private boolean isHitter = false;
     private boolean isManager = false;
+    private String fullName = "";
 
+    @FXML 
+    void handlePicture(ActionEvent event)
+    {
+        FileChooser fileChooser = new FileChooser(); 
+        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)","*.JPG");
+        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)","*.PNG");
+        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+        File file = fileChooser.showOpenDialog(null);
+        image = new Image(file.toURI().toString());
+        profilePicture.setImage(image);
+    }
+    
     @FXML
     void handleHitterCheck(ActionEvent event) 
     {
@@ -172,26 +193,34 @@ public class UpdatePlayerPageController implements Initializable {
                 Model.DBUtil.createPitcher(selectedPlayerID);
             }
             
-            try{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/updatePlayerConfirmWindow.fxml"));
-                Parent root1 = (Parent)fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.setTitle("Player Updated!");
-                stage.setScene(new Scene(root1));
-                stage.show();
-            }catch(Exception e){
-                System.out.println("Cant load new window");
-            } 
-        }      
+            if(image != null)
+            {
+                File newfile = new File("src/images/profile/"+selectedPlayerID+".png"); 
+                try{
+                    ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", newfile);
+                }catch(IOException ex){
+                    System.out.println(ex);
+                }
+            }
+            
+            //pop up a confirm window
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Player Updated");
+            alert.setHeaderText(null);
+            alert.setContentText("You have successfully updated "+fullName+".");
+            alert.showAndWait();
+        } 
     }
     
     @FXML 
     void handlePlayerCombo(ActionEvent event)
     {
         try{
-            String selectedItem = choosePlayerCombo.getSelectionModel().getSelectedItem();; 
+            String selectedItem = choosePlayerCombo.getSelectionModel().getSelectedItem();
             String[] tokens = selectedItem.split(":");
             selectedPlayerID = Integer.parseInt(tokens[1]);
+            String[] nameTokens = selectedItem.split(" ");
+            fullName = nameTokens[0]+" "+nameTokens[1];
 
             EntityManager em = Model.DBUtil.getEM();
             Query fNameQuery = em.createNativeQuery("SELECT fname FROM player WHERE playerid=?");
@@ -266,8 +295,15 @@ public class UpdatePlayerPageController implements Initializable {
                 managerCheck.setDisable(true);
             }
 
+            File file = new File("src/images/profile/"+selectedPlayerID+".png");
+            Image image = new Image(file.toURI().toString());
+            profilePicture.setImage(image);
+
         }catch(Exception e){
             System.out.println("Select a Player"); 
+            File newfile = new File("src/images/defaultProfile.jpg"); 
+            image = new Image(newfile.toURI().toString());
+            profilePicture.setImage(image);
             choosePlayerCombo.getItems().clear();
         }
     }

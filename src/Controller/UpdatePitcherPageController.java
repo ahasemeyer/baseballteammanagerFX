@@ -15,11 +15,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
@@ -63,12 +62,16 @@ public class UpdatePitcherPageController implements Initializable {
         boolean wEntered = true, lEntered = true, gEntered = true, gsEntered = true, svEntered = true,
                 svoEntered = true, hEntered = true, rEntered = true, erEntered = true, hrEntered = true,
                 bbEntered = true, hbpEntered = true, soEntered = true, ipEntered = true, pEntered = true; 
+        String fullName = "";
         
         
         try{
             String selectedItem = choosePlayerCombo.getSelectionModel().getSelectedItem();; 
             String[] tokens = selectedItem.split(":");
             playerID = Integer.parseInt(tokens[1]);
+            
+            String[] nameTokens = selectedItem.split(" ");
+            fullName = nameTokens[0]+" "+nameTokens[1];
             
             try{
                 inWins = Integer.parseInt(winsText.getText());
@@ -177,24 +180,40 @@ public class UpdatePitcherPageController implements Initializable {
                 && ipEntered && hEntered && rEntered && erEntered && hrEntered && bbEntered
                 && hbpEntered && soEntered)
         {
+            //update Pitcher data
             errorMessage = ""; 
-            
+            errorMessageLabel.setText(errorMessage);
             Pitcher pitcher1 = new Pitcher(playerID); 
             pitcher1 = Pitcher.loadPitcherData(playerID);
             pitcher1.updatePitcher(inWins, inLosses, inGames, inGS, inSaves, inSVO, inIP, 
                     inHits, inRuns, inER, inHR, inBB, inHBP, inSO);
             Model.DBUtil.updatePitcher(pitcher1);
             
-            try{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/updatePlayerConfirmWindow.fxml"));
-                Parent root1 = (Parent)fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.setTitle("Pitcher Updated!");
-                stage.setScene(new Scene(root1));
-                stage.show();
-            }catch(Exception e){
-                System.out.println("Cant load new window");
-            } 
+            //pop up a confirm window
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Pitcher Updated");
+            alert.setHeaderText(null);
+            alert.setContentText("You have successfully updated "+fullName+".");
+            alert.showAndWait();
+            
+            //reset values
+            winsText.setText("0");
+            lossesText.setText("0");
+            gamesText.setText("0");
+            gamesStartedText.setText("0");
+            savesText.setText("0");
+            saveOppText.setText("0");
+            inningsPitchedText.setText("0.0");
+            hitsText.setText("0");
+            runsText.setText("0");
+            earnedRunsText.setText("0");
+            homerunsText.setText("0");
+            baseOnBallsText.setText("0");
+            hitByPitchText.setText("0");
+            strikeoutsText.setText("0");
+            teamCombo.getSelectionModel().clearSelection();
+            choosePlayerCombo.getSelectionModel().clearSelection();
+
         }
         errorMessageLabel.setText(errorMessage);
     }
@@ -204,58 +223,63 @@ public class UpdatePitcherPageController implements Initializable {
     {
         String selectedTeam = teamCombo.getSelectionModel().getSelectedItem();
         EntityManager em = Model.DBUtil.getEM();
-        Query teamIDQuery = em.createNativeQuery("SELECT teamid FROM team WHERE teamname=?");
-        teamIDQuery.setParameter(1,selectedTeam);
-        int teamID = (int)teamIDQuery.getSingleResult();
         
-        Query playerIDSQL = em.createNativeQuery("SELECT playerid FROM player WHERE teamid=?");
-        playerIDSQL.setParameter(1,teamID);
-        List<Integer>playerIDList = playerIDSQL.getResultList();
-        
-        Query pitcherIDSQL = em.createNativeQuery("SELECT playerid FROM pitcher");
-        List<Integer>pitcherIDList = pitcherIDSQL.getResultList();
-        
-        counter = 0; 
-        int[] playerIDArray = new int[playerIDList.size()];
-        playerIDList.forEach((data) -> {
-            playerIDArray[counter]=data;
-            counter++;
-        });
-        
-        counter = 0; 
-        int[] pitcherIDArray = new int[pitcherIDList.size()];
-        pitcherIDList.forEach((data) -> {
-            pitcherIDArray[counter]=data;
-            counter++;
-        });
-        
-        int counter1 = 0;
-        int[] actualPitcherID = new int[playerIDList.size()];
-        for(int i=0; i<playerIDList.size(); i++)
-        {
-            for(int j=0; j<pitcherIDList.size(); j++)
+        try{
+            Query teamIDQuery = em.createNativeQuery("SELECT teamid FROM team WHERE teamname=?");
+            teamIDQuery.setParameter(1,selectedTeam);
+            int teamID = (int)teamIDQuery.getSingleResult();
+
+            Query playerIDSQL = em.createNativeQuery("SELECT playerid FROM player WHERE teamid=?");
+            playerIDSQL.setParameter(1,teamID);
+            List<Integer>playerIDList = playerIDSQL.getResultList();
+
+            Query pitcherIDSQL = em.createNativeQuery("SELECT playerid FROM pitcher");
+            List<Integer>pitcherIDList = pitcherIDSQL.getResultList();
+
+            counter = 0; 
+            int[] playerIDArray = new int[playerIDList.size()];
+            playerIDList.forEach((data) -> {
+                playerIDArray[counter]=data;
+                counter++;
+            });
+
+            counter = 0; 
+            int[] pitcherIDArray = new int[pitcherIDList.size()];
+            pitcherIDList.forEach((data) -> {
+                pitcherIDArray[counter]=data;
+                counter++;
+            });
+
+            int counter1 = 0;
+            int[] actualPitcherID = new int[playerIDList.size()];
+            for(int i=0; i<playerIDList.size(); i++)
             {
-                if(playerIDArray[i]==pitcherIDArray[j])
+                for(int j=0; j<pitcherIDList.size(); j++)
                 {
-                    actualPitcherID[counter1] = playerIDArray[i];
-                    counter1++;
+                    if(playerIDArray[i]==pitcherIDArray[j])
+                    {
+                        actualPitcherID[counter1] = playerIDArray[i];
+                        counter1++;
+                    }
                 }
             }
+
+            choosePlayerCombo.getItems().clear(); 
+            for(int i=0; i<counter1;i++)
+            {
+                Query playerFName = em.createNativeQuery("SELECT fname FROM player WHERE playerid=?");
+                playerFName.setParameter(1,actualPitcherID[i]);
+                String fName = (String)playerFName.getSingleResult();
+
+                Query playerLName = em.createNativeQuery("SELECT lname FROM player WHERE playerid=?");
+                playerLName.setParameter(1,actualPitcherID[i]);
+                String lName = (String)playerLName.getSingleResult();
+
+                choosePlayerCombo.getItems().add(lName+", "+fName+"      ID:"+actualPitcherID[i]);
+            } 
+        }catch(Exception e){
+            System.out.println("Select a Pitcher");
         }
-         
-        choosePlayerCombo.getItems().clear(); 
-        for(int i=0; i<counter1;i++)
-        {
-            Query playerFName = em.createNativeQuery("SELECT fname FROM player WHERE playerid=?");
-            playerFName.setParameter(1,actualPitcherID[i]);
-            String fName = (String)playerFName.getSingleResult();
-            
-            Query playerLName = em.createNativeQuery("SELECT lname FROM player WHERE playerid=?");
-            playerLName.setParameter(1,actualPitcherID[i]);
-            String lName = (String)playerLName.getSingleResult();
-            
-            choosePlayerCombo.getItems().add(lName+", "+fName+"      ID:"+actualPitcherID[i]);
-        } 
     }
     
     public void initialize(URL url, ResourceBundle rb) 

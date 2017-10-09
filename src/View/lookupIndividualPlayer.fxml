@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -10,39 +11,108 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="224.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LookupIndividualPlayerController">
+<AnchorPane id="AnchorPane" prefHeight="221.0" prefWidth="608.0" styleClass="anchorPane" stylesheets="@../CSS/mainmenu.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LookupIndividualPlayerController">
    <children>
-      <HBox layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="407.0" spacing="5.0">
+      <Pane layoutX="166.0" layoutY="117.0" prefHeight="85.0" prefWidth="435.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css" />
+      <HBox layoutX="14.0" layoutY="5.0" prefHeight="45.0" prefWidth="587.0" spacing="5.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
          <children>
             <ComboBox fx:id="typeCombo" onAction="#handleType" prefWidth="150.0" promptText="Player Type" />
             <ComboBox fx:id="teamCombo" onAction="#handleTeam" prefWidth="150.0" promptText="Select Team" />
             <ComboBox fx:id="playerCombo" onAction="#handlePlayer" prefWidth="150.0" promptText="Select Player" />
+            <Button mnemonicParsing="false" onAction="#handleLookup" prefHeight="24.0" prefWidth="103.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup" />
          </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
       </HBox>
-      <Button layoutX="435.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleLookup" text="Lookup" />
-      <TableView layoutX="175.0" layoutY="134.0" prefHeight="70.0" prefWidth="417.0">
+      <TableView fx:id="hitterTable" layoutX="175.0" layoutY="128.0" prefHeight="62.0" prefWidth="417.0" visible="false">
         <columns>
-          <TableColumn prefWidth="51.0" text="C1" />
-          <TableColumn prefWidth="49.0" text="C2" />
+          <TableColumn fx:id="avgCol" prefWidth="51.0" text="AVG" />
+          <TableColumn fx:id="obpCol" prefWidth="49.0" text="OBP" />
+            <TableColumn fx:id="slgCol" prefWidth="49.0" text="SLG" />
+            <TableColumn fx:id="rbiCol" prefWidth="49.0" text="RBI" />
+            <TableColumn fx:id="abCol" prefWidth="49.0" text="AB" />
+            <TableColumn fx:id="hCol" prefWidth="49.0" text="H" />
+            <TableColumn fx:id="b2Col" prefWidth="49.0" text="2B" />
+            <TableColumn fx:id="b3Col" prefWidth="49.0" text="3B" />
+            <TableColumn fx:id="hrCol" prefWidth="49.0" text="HR" />
+            <TableColumn fx:id="tbCol" prefWidth="49.0" text="TB" />
+            <TableColumn fx:id="soCol" prefWidth="49.0" text="SO" />
+            <TableColumn fx:id="bbCol" prefWidth="49.0" text="BB" />
+            <TableColumn fx:id="hbpCol" prefWidth="49.0" text="HBP" />
+            <TableColumn fx:id="sbCol" prefWidth="49.0" text="SB" />
+            <TableColumn fx:id="csCol" prefWidth="49.0" text="CS" />
+            <TableColumn fx:id="sbpCol" prefWidth="49.0" text="SB%" />
+            <TableColumn fx:id="sacCol" prefWidth="49.0" text="SAC" />
         </columns>
       </TableView>
-      <ImageView fx:id="profilePicture" fitHeight="150.0" fitWidth="133.0" layoutX="25.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/defaultProfile.jpg" />
-         </image>
-      </ImageView>
-      <FlowPane layoutX="175.0" layoutY="57.0" prefHeight="49.0" prefWidth="351.0">
+      <FlowPane layoutX="166.0" layoutY="57.0" prefHeight="49.0" prefWidth="435.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
          <children>
-            <Label prefHeight="17.0" prefWidth="50.0" text="Name:" />
-            <Label fx:id="playerNamelbl" prefHeight="17.0" prefWidth="169.0" />
-            <Label prefHeight="17.0" prefWidth="62.0" text="Player ID:" />
-            <Label fx:id="playerIDlbl" prefHeight="17.0" prefWidth="55.0" />
-            <Label prefHeight="17.0" prefWidth="52.0" text="Team: " />
-            <Label fx:id="teamNamelbl" prefHeight="17.0" prefWidth="167.0" />
-            <Label prefHeight="17.0" prefWidth="65.0" text="Position:" />
-            <Label fx:id="positionlbl" prefHeight="17.0" prefWidth="55.0" />
+            <Label prefHeight="17.0" prefWidth="50.0" styleClass="sectionLabelSmall" stylesheets="@../CSS/mainmenu.css" text="  Name:" />
+            <Label fx:id="playerNamelbl" prefHeight="17.0" prefWidth="169.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label prefHeight="17.0" prefWidth="62.0" styleClass="sectionLabelSmall" stylesheets="@../CSS/mainmenu.css" text="Player ID:" />
+            <Label fx:id="playerIDlbl" prefHeight="17.0" prefWidth="111.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label prefHeight="17.0" prefWidth="52.0" styleClass="sectionLabelSmall" stylesheets="@../CSS/mainmenu.css" text="  Team: " />
+            <Label fx:id="teamNamelbl" prefHeight="17.0" prefWidth="167.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label prefHeight="17.0" prefWidth="65.0" styleClass="sectionLabelSmall" stylesheets="@../CSS/mainmenu.css" text="Position:" />
+            <Label fx:id="positionlbl" prefHeight="17.0" prefWidth="100.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
          </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
       </FlowPane>
+      <TableView fx:id="pitcherTable" layoutX="175.0" layoutY="128.0" prefHeight="62.0" prefWidth="417.0" visible="false">
+        <columns>
+          <TableColumn fx:id="wCol" prefWidth="40.0" text="W" />
+          <TableColumn fx:id="lCol" prefWidth="40.0" text="L" />
+            <TableColumn fx:id="gCol" prefWidth="40.0" text="G" />
+            <TableColumn fx:id="gsCol" prefWidth="40.0" text="GS" />
+            <TableColumn fx:id="eraCol" prefWidth="50.0" text="ERA" />
+            <TableColumn fx:id="psoCol" prefWidth="40.0" text="SO" />
+            <TableColumn fx:id="erCol" prefWidth="40.0" text="ER" />
+            <TableColumn fx:id="rCol" prefWidth="40.0" text="R" />
+            <TableColumn fx:id="ipCol" prefWidth="50.0" text="IP" />
+            <TableColumn fx:id="phCol" prefWidth="40.0" text="H" />
+            <TableColumn fx:id="pavgCol" prefWidth="40.0" text="AVG" />
+            <TableColumn fx:id="phrCol" prefWidth="40.0" text="HR" />
+            <TableColumn fx:id="pbbCol" prefWidth="40.0" text="BB" />
+            <TableColumn fx:id="phbpCol" prefWidth="40.0" text="HBP" />
+            <TableColumn fx:id="whipCol" prefWidth="50.0" text="WHIP" />
+            <TableColumn fx:id="svCol" prefWidth="40.0" text="SV" />
+            <TableColumn fx:id="svoCol" prefWidth="40.0" text="SVO" />
+        </columns>
+      </TableView>
+      <TableView fx:id="managerTable" layoutX="175.0" layoutY="128.0" prefHeight="62.0" prefWidth="307.0" visible="false">
+        <columns>
+          <TableColumn fx:id="mwCol" prefWidth="75.0" text="W" />
+          <TableColumn fx:id="mlCol" prefWidth="75.0" text="L" />
+            <TableColumn fx:id="mtCol" prefWidth="75.0" text="T" />
+            <TableColumn fx:id="mwpCol" prefWidth="75.0" text="W %" />
+        </columns>
+      </TableView>
+      <Pane layoutX="14.0" layoutY="57.0" prefHeight="157.0" prefWidth="143.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
+         <children>
+            <ImageView fx:id="profilePicture" fitHeight="140.0" fitWidth="128.0" layoutX="8.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/defaultProfile.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

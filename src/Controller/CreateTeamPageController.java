@@ -7,7 +7,6 @@ package Controller;
 
 import Model.Team;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,6 +41,11 @@ public class CreateTeamPageController implements Initializable {
         Team newTeam;
         boolean duplicate = false; 
         
+        if(teamName.getText()==null || teamName.getText().equals(" "))
+        {
+            errorMessageLabel.setText("Please enter a team name.");
+        }
+        
         try{
             Query duplicateQuery = em.createNativeQuery("SELECT teamid FROM team WHERE teamname=?");
             duplicateQuery.setParameter(1,teamName.getText());
@@ -52,20 +56,17 @@ public class CreateTeamPageController implements Initializable {
             duplicate = false;
         }  
         
-        if(!duplicate)
+        if(!duplicate && teamName.getText()!=null)
         {
             newTeam = Model.DBUtil.createTeam(teamName.getText());
             errorMessageLabel.setText("");
-            try{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/teamCreateConfirmWindow.fxml"));
-                Parent root1 = (Parent)fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.setTitle("Team Created!");
-                stage.setScene(new Scene(root1));
-                stage.show();
-            }catch(Exception e){
-                System.out.println("Cant load new window");
-            } 
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Team Created");
+            alert.setHeaderText(null);
+            alert.setContentText("You have successfully created team "+newTeam.getTeamName()+", TeamID: "+newTeam.getTeamID()+".");
+            alert.showAndWait();
+            
+            teamName.setText(null);
         }
     }
 

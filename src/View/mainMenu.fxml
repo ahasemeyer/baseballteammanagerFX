@@ -37,7 +37,7 @@
                   <TableColumn fx:id="lswpCol" prefWidth="57.0" text="W %" />
               </columns>
             </TableView>
-            <Button fx:id="lsRefresh" layoutX="198.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlelsRefresh" stylesheets="@../CSS/mainmenu.css" text="Refresh" />
+            <Button fx:id="lsRefresh" layoutX="198.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlelsRefresh" stylesheets="@../CSS/mainmenu.css" text="Refresh" visible="false" />
          </children>
       </Pane>
       <Pane layoutX="344.0" layoutY="249.0" prefHeight="369.0" prefWidth="288.0" styleClass="tablePane" stylesheets="@../CSS/mainmenu.css">
@@ -202,12 +202,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="lookupHittersButton" mnemonicParsing="false" onAction="#handleLookupHitters" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Hitters" />
-                        <Button fx:id="lookupPitcherButton" mnemonicParsing="false" onAction="#handleLookupPitchers" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Pitchers" GridPane.columnIndex="1" />
-                        <Button fx:id="lookupPlayersButton" mnemonicParsing="false" onAction="#handleLookupPlayers" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Players" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" onAction="#handleLookupManager" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Manager" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Teams" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2" />
-                        <Button mnemonicParsing="false" onAction="#handleIndivPlayer" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Individual Player" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" onAction="#handleIndivPlayer" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Individual Player" textAlignment="CENTER" wrapText="true" />
+                        <Button fx:id="lookupPlayersButton" mnemonicParsing="false" onAction="#handleLookupPlayers" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup All  Players" GridPane.columnIndex="1" />
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Players by Team" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
+                        <Button fx:id="lookupHittersButton" mnemonicParsing="false" onAction="#handleLookupHitters" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup All Hitters" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button fx:id="lookupPitcherButton" mnemonicParsing="false" onAction="#handleLookupPitchers" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup All Pitchers" GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" onAction="#handleLookupManager" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup All Managers" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>

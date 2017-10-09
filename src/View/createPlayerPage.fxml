@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -8,37 +9,105 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="392.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CreatePlayerPageController">
+<AnchorPane id="AnchorPane" prefHeight="406.0" prefWidth="385.0" styleClass="anchorPane" stylesheets="@../CSS/mainmenu.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CreatePlayerPageController">
    <children>
-      <RadioButton fx:id="hitterRadio" layoutX="216.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleHitterRadio" text="Hitter" />
-      <RadioButton fx:id="pitcherRadio" layoutX="300.0" layoutY="248.0" mnemonicParsing="false" onAction="#handlePitcherRadio" text="Pitcher" />
-      <RadioButton fx:id="managerRadio" layoutX="216.0" layoutY="277.0" mnemonicParsing="false" onAction="#handleManagerRadio" text="Manager" />
-      <Label layoutX="61.0" layoutY="14.0" text="Fill out the form to create a player">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Button layoutX="261.0" layoutY="199.0" mnemonicParsing="false" onAction="#handlePicture" text="Upload Picture" />
-      <Button layoutX="265.0" layoutY="315.0" mnemonicParsing="false" onAction="#createPlayerButton" text="Create Player" />
-      <Label fx:id="errorMessageLabel" layoutX="44.0" layoutY="351.0" prefHeight="39.0" prefWidth="323.0" textFill="RED" wrapText="true" />
-      <ImageView fx:id="profilePicture" fitHeight="136.0" fitWidth="129.0" layoutX="244.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/defaultProfile.jpg" />
-         </image>
-      </ImageView>
-      <VBox layoutX="28.0" layoutY="60.0" prefHeight="303.0" prefWidth="181.0" spacing="15.0">
+      <VBox layoutX="14.0" layoutY="89.0" prefHeight="303.0" prefWidth="190.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
          <children>
             <TextField fx:id="firstName" promptText="Enter First Name" />
+            <Label fx:id="fNameError" text="Enter First Name" textFill="RED" visible="false">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
             <TextField fx:id="lastName" promptText="Enter Last Name" />
+            <Label fx:id="lNameError" layoutX="20.0" layoutY="45.0" text="Enter Last Name" textFill="RED" visible="false">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
             <TextField fx:id="number" promptText="Player Number" />
+            <Label fx:id="pNumberError" layoutX="20.0" layoutY="85.0" text="Enter Player Number" textFill="RED" visible="false">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
             <ComboBox fx:id="positionCombo" prefWidth="150.0" promptText="Position" />
+            <Label fx:id="positionError" layoutX="20.0" layoutY="125.0" text="Enter Position" textFill="RED" visible="false">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
             <ComboBox fx:id="throwingArmCombo" prefWidth="150.0" promptText="Throwing Arm" />
+            <Label fx:id="tArmError" layoutX="20.0" layoutY="165.0" text="Enter Throwing Arm" textFill="RED" visible="false">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
             <ComboBox fx:id="battingStanceCombo" prefWidth="150.0" promptText="Batting Stance" />
+            <Label fx:id="bStanceError" layoutX="20.0" layoutY="205.0" text="Enter Batting Stance" textFill="RED" visible="false">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
             <ComboBox fx:id="teamCombo" prefWidth="150.0" promptText="Team Name" />
+            <Label fx:id="tNameError" layoutX="20.0" layoutY="245.0" text="Enter Team Name" textFill="RED" visible="false">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
          </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
       </VBox>
+      <VBox layoutX="213.0" layoutY="216.0" prefHeight="149.0" prefWidth="159.0" spacing="10.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
+         <children>
+            <RadioButton fx:id="hitterRadio" mnemonicParsing="false" onAction="#handleHitterRadio" text="Hitter" />
+            <RadioButton fx:id="pitcherRadio" mnemonicParsing="false" onAction="#handlePitcherRadio" text="Pitcher" />
+            <RadioButton fx:id="managerRadio" mnemonicParsing="false" onAction="#handleManagerRadio" text="Manager" />
+            <Button mnemonicParsing="false" onAction="#createPlayerButton" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Create Player" />
+            <Label fx:id="errorMessageLabel" prefHeight="46.0" prefWidth="170.0" text="* Fillout Missing Fields" textFill="RED" visible="false" wrapText="true">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </VBox>
+      <VBox layoutX="213.0" layoutY="14.0" prefHeight="175.0" prefWidth="159.0" spacing="10.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
+         <children>
+            <ImageView fx:id="profilePicture" fitHeight="136.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/defaultProfile.jpg" />
+               </image>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ImageView>
+            <Button mnemonicParsing="false" onAction="#handlePicture" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Upload Picture" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets left="15.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </VBox>
+      <Pane layoutX="14.0" layoutY="14.0" prefHeight="63.0" prefWidth="190.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
+         <children>
+            <Label layoutX="14.0" layoutY="1.0" prefHeight="57.0" prefWidth="159.0" styleClass="sectionLabel" stylesheets="@../CSS/mainmenu.css" text="Fill out the form to create a player" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

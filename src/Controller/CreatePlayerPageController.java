@@ -35,21 +35,30 @@ public class CreatePlayerPageController implements Initializable {
     @FXML private ComboBox<String> positionCombo;
     @FXML private ComboBox<String> throwingArmCombo;
     @FXML private Label errorMessageLabel;
+    @FXML private Label fNameError;
+    @FXML private Label lNameError;
+    @FXML private Label pNumberError;
+    @FXML private Label positionError;
+    @FXML private Label tArmError;
+    @FXML private Label bStanceError; 
+    @FXML private Label tNameError; 
     @FXML private ImageView profilePicture; 
     private Image image = null; 
 
     @FXML 
     void handlePicture(ActionEvent event)
     {
-        FileChooser fileChooser = new FileChooser(); 
-        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)","*.JPG");
-        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)","*.PNG");
-        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
-        
-        File file = fileChooser.showOpenDialog(null);
-        image = new Image(file.toURI().toString());
-//        System.out.println(file); 
-        profilePicture.setImage(image);
+        try{
+            FileChooser fileChooser = new FileChooser(); 
+            FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)","*.JPG");
+            FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)","*.PNG");
+            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+            File file = fileChooser.showOpenDialog(null);
+            image = new Image(file.toURI().toString());
+            profilePicture.setImage(image);
+        }catch(Exception e){
+            System.out.println("Choose picture aborted.");
+        }
     }
     
     @FXML
@@ -100,7 +109,6 @@ public class CreatePlayerPageController implements Initializable {
         boolean armEntered = true;
         boolean stanceEntered = true;
         boolean teamEntered = true; 
-        String errorMessage = "Please fill out missing fields:"; 
         
         String stringNumber = number.getText(); 
         int inNumber = 0;
@@ -108,13 +116,14 @@ public class CreatePlayerPageController implements Initializable {
         if(stringNumber.equals(""))
         {
             numberEntered = false;
-            errorMessage += " number,";
+            pNumberError.setVisible(true);
         }
         else if(!stringNumber.matches("[0-9]*"))
         {
-            errorMessage += " number,";
+            pNumberError.setVisible(true);
             numberEntered = false;
         }else{
+            pNumberError.setVisible(false);
             numberEntered = true;
             inNumber = Integer.parseInt(number.getText());
         }
@@ -123,111 +132,127 @@ public class CreatePlayerPageController implements Initializable {
         try{
             stringArm.equals("");
             armEntered = true;
+            tArmError.setVisible(false);
         }catch(Exception e){
             armEntered = false;
-            errorMessage += " throwing arm,";
-        }      
+            tArmError.setVisible(true);
+        }
 
         String inPos = positionCombo.getSelectionModel().getSelectedItem();
         try{
             inPos.equals("");
             positionEntered = true;
+            positionError.setVisible(false);
         }catch(Exception e){
             positionEntered = false;
-            errorMessage += " position,";
+            positionError.setVisible(true);
         }
         
         String stringStance = battingStanceCombo.getSelectionModel().getSelectedItem();
         try{
             stringStance.equals("");
             stanceEntered = true;
+            bStanceError.setVisible(false);
         }catch(Exception e){
             stanceEntered = false;
-            errorMessage += " stance,";
+            bStanceError.setVisible(true);
         }
 
         String comboText = teamCombo.getSelectionModel().getSelectedItem(); 
         if(comboText == null)
         {
             teamEntered = false;
-            errorMessage += " team,";
+            tNameError.setVisible(true);
         }else{
-            teamEntered = true;     
+            teamEntered = true; 
+            tNameError.setVisible(false);
         }
 
         if(firstName.getText().equals(""))
         {
             fNameEntered = false;
-            errorMessage += " first name,";
+            fNameError.setVisible(true);
+        }else{
+            fNameError.setVisible(false);
         }
         
         if(lastName.getText().equals(""))
         {
             lNameEntered = false;
-            errorMessage += " last name,";
+            lNameError.setVisible(true);
+        }else{
+            lNameError.setVisible(false);
         }
+        
         
         if(!fNameEntered || !lNameEntered || !numberEntered || !armEntered || !positionEntered
                 || !stanceEntered || !teamEntered)
-            errorMessageLabel.setText(errorMessage);
+            errorMessageLabel.setVisible(true);
         
         if(fNameEntered && lNameEntered && numberEntered && armEntered && positionEntered
                 && stanceEntered && teamEntered)
         {
+            errorMessageLabel.setVisible(false);
             int playerID;
             EntityManager em = Model.DBUtil.getEM();
             Query teamID = em.createNativeQuery("SELECT a.teamid FROM team a WHERE a.teamname=?");
             teamID.setParameter(1,comboText);
             int sqlTeamID = (int)teamID.getSingleResult();
-
-            
-            errorMessageLabel.setText("");
             String inArm = stringArm;
             String inStance = stringStance;
-
-            
-
-        Player newPlayer = Model.DBUtil.createPlayer(firstName.getText(), lastName.getText(), inPos, inNumber, inArm, inStance, sqlTeamID);
-        String confirmMessage =" created as a Player"; 
+            Player newPlayer = Model.DBUtil.createPlayer(firstName.getText(), lastName.getText(), inPos, inNumber, inArm, inStance, sqlTeamID);
+            String confirmMessage =" created as a Player"; 
         
-        if(hitterRadio.isSelected())
-        {
-            System.out.println("Hitter Created As: "+firstName.getText()+" "+lastName.getText());
-            String hitterMessage = ", Hitter";
-            confirmMessage += hitterMessage; 
-            Model.DBUtil.createHitter(newPlayer.getPlayerid());
-        }
-        if(pitcherRadio.isSelected())
-        {
-            System.out.println("Pitcher Created As: "+firstName.getText()+" "+lastName.getText());
-            String pitcherMessage = ", Pitcher";
-            confirmMessage += pitcherMessage;
-            Model.DBUtil.createPitcher(newPlayer.getPlayerid());
-        }
-        if(managerRadio.isSelected())
-        {
-            System.out.println("Manager Created As: "+firstName.getText()+" "+lastName.getText());
-            String managerMessage = ", Manager";
-            confirmMessage += managerMessage;
-            Model.DBUtil.createManager(newPlayer.getPlayerid());
-        } 
-        
-        if(image != null)
-        {
-            File newfile = new File("src/images/profile/"+newPlayer.getPlayerid()+".png"); 
-            try{
-                ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", newfile);
-            }catch(IOException ex){
-                System.out.println(ex);
+            if(hitterRadio.isSelected())
+            {
+                System.out.println("Hitter Created As: "+firstName.getText()+" "+lastName.getText());
+                String hitterMessage = ", Hitter";
+                confirmMessage += hitterMessage; 
+                Model.DBUtil.createHitter(newPlayer.getPlayerid());
             }
-        }
-
-        playerID = newPlayer.getPlayerid();
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Player Created");
-        alert.setHeaderText("You have successfully created "+newPlayer.getFname()+" "+newPlayer.getLname()+", PlayerID: "+playerID);
-        alert.setContentText(newPlayer.getFname()+" "+newPlayer.getLname()+confirmMessage+" on team "+comboText+".");
-        alert.showAndWait();   
+            if(pitcherRadio.isSelected())
+            {
+                System.out.println("Pitcher Created As: "+firstName.getText()+" "+lastName.getText());
+                String pitcherMessage = ", Pitcher";
+                confirmMessage += pitcherMessage;
+                Model.DBUtil.createPitcher(newPlayer.getPlayerid());
+            }
+            if(managerRadio.isSelected())
+            {
+                System.out.println("Manager Created As: "+firstName.getText()+" "+lastName.getText());
+                String managerMessage = ", Manager";
+                confirmMessage += managerMessage;
+                Model.DBUtil.createManager(newPlayer.getPlayerid());
+            } 
+            if(image != null)
+            {
+                File newfile = new File("src/images/profile/"+newPlayer.getPlayerid()+".png"); 
+                try{
+                    ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", newfile);
+                }catch(IOException ex){
+                    System.out.println(ex);
+                }
+            }
+            playerID = newPlayer.getPlayerid();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Player Created");
+            alert.setHeaderText(null);
+            alert.setContentText("You have successfully created "+newPlayer.getFname()+" "+newPlayer.getLname()+", PlayerID: "+playerID+".");
+            alert.showAndWait();   
+            
+            firstName.setText(null);
+            lastName.setText(null);
+            number.setText(null);
+            pitcherRadio.setSelected(false);
+            hitterRadio.setSelected(false);
+            managerRadio.setSelected(false);
+            teamCombo.getSelectionModel().clearSelection();
+            positionCombo.getSelectionModel().clearSelection();
+            throwingArmCombo.getSelectionModel().clearSelection();
+            battingStanceCombo.getSelectionModel().clearSelection();
+            File defaultPic = new File("src/images/defaultProfile.jpg");
+            image = new Image(defaultPic.toURI().toString());
+            profilePicture.setImage(image);
         }
     }
 

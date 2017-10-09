@@ -19,6 +19,18 @@ and open the template in the editor.
   -fx-background-image: url("/images/dirt.jpg"); 
 }
 
+.anchorPaneGrass {
+  -fx-background-image: url("/images/grass.jpg"); 
+}
+
+.anchorPaneBat {
+  -fx-background-image: url("/images/batTex2.jpg"); 
+}
+
+.anchorPaneField {
+  -fx-background-image: url("/images/baseball-field.jpg"); 
+}
+
 .tablePane {
     -fx-background-radius: 2;
     -fx-background-insets: 0,1,1;
@@ -61,6 +73,14 @@ and open the template in the editor.
     -fx-font-family: "Impact";
     -fx-font-weight: bold;
     -fx-font-size: 1.6em;
+    -fx-text-fill: linear-gradient(#426ab7, #263e75);   
+    -fx-effect: dropshadow(one-pass-box, darkgray, 5, 0, 0, 0);       
+}
+
+.sectionLabelSmall {  
+    -fx-font-family: "Impact";
+    -fx-font-weight: bold;
+    -fx-font-size: 1.2em;
     -fx-text-fill: linear-gradient(#426ab7, #263e75);   
     -fx-effect: dropshadow(one-pass-box, darkgray, 5, 0, 0, 0);       
 }
