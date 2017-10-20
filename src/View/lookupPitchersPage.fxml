@@ -16,10 +16,10 @@
             <TableColumn fx:id="lCol" minWidth="0.0" prefWidth="30.0" text="L" />
             <TableColumn fx:id="gCol" minWidth="0.0" prefWidth="30.0" text="G" />
             <TableColumn fx:id="gsCol" minWidth="0.0" prefWidth="30.0" text="GS" />
-            <TableColumn fx:id="eraCol" minWidth="0.0" prefWidth="55.0" text="ERA" />
+            <TableColumn fx:id="eraCol" minWidth="0.0" prefWidth="45.0" text="ERA" />
             <TableColumn fx:id="erCol" minWidth="0.0" prefWidth="30.0" text="ER" />
             <TableColumn fx:id="rCol" minWidth="0.0" prefWidth="30.0" text="R" />
-            <TableColumn fx:id="ipCol" minWidth="0.0" prefWidth="40.0" text="IP" />
+            <TableColumn fx:id="ipCol" minWidth="0.0" prefWidth="50.0" text="IP" />
             <TableColumn fx:id="hCol" minWidth="0.0" prefWidth="30.0" text="H" />
             <TableColumn fx:id="hrCol" minWidth="0.0" prefWidth="30.0" text="HR" />
             <TableColumn fx:id="bbCol" minWidth="0.0" prefWidth="30.0" text="BB" />

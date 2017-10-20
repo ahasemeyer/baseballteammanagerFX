@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * FXML Controller class
+ *
+ * @author hasmy
+ * @document DeletePlayerPageController.java
+ * @description Handles the delete players page, if a player
+ *      is selected they will be deleted from all tables.
  */
 package Controller;
 
@@ -17,11 +20,6 @@ import javafx.scene.control.Label;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author hasmy
- */
 public class DeletePlayerPageController implements Initializable 
 {
     private int counter; 
@@ -32,6 +30,8 @@ public class DeletePlayerPageController implements Initializable
     @FXML private Label teamlbl;
     @FXML private Label playerlbl; 
 
+    //Pre: team and player must be selected
+    //Post: player will be deleted from all tables
     @FXML 
     void handleDeletePlayer(ActionEvent event) 
     {    
@@ -62,6 +62,8 @@ public class DeletePlayerPageController implements Initializable
         }
     }
     
+    //Pre: select a team
+    //Post: a list of players on that time will populate playerCombo
     @FXML
     void handleTeamCombo(ActionEvent event)
     {
@@ -69,6 +71,7 @@ public class DeletePlayerPageController implements Initializable
         EntityManager em = Model.DBUtil.getEM();
         int teamID = 0; 
         
+        //select teamid with a given teamname
         try{
             Query teamIDQuery = em.createNativeQuery("SELECT teamid FROM team WHERE teamname=?");
             teamIDQuery.setParameter(1,selectedTeam);
@@ -79,6 +82,7 @@ public class DeletePlayerPageController implements Initializable
             teamlbl.setVisible(true);
         }
             
+        //try to find players in database for a given team and load into playerCombo
         try{
             Query playersFirst = em.createNativeQuery("SELECT fname FROM player WHERE teamid=?");
             playersFirst.setParameter(1,teamID);
@@ -119,6 +123,7 @@ public class DeletePlayerPageController implements Initializable
         }
     }
     
+    //Initialize a list of all teams
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {

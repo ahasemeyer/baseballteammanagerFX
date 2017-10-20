@@ -1,8 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/* 
+    @author Austin Hasemeyer
+    @document ConfirmWindowController.java
+    @description This class will handle the confirm window which appears
+        after successful operations. Currently not in use
+*/
 package Controller;
 
 import java.net.URL;
@@ -15,21 +16,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author hasmy
- */
+
 public class ConfirmWindowController implements Initializable {
 
     @FXML private Label confirmMessageLabel;
     @FXML private Button closeButton; 
+    
+    //close window on button press
     @FXML void handleCloseButton(ActionEvent event) 
     {
-//        Stage stage = (Stage) closeButton.getScene().getWindow();
-//        stage.close();
-        //((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
-        
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close(); 

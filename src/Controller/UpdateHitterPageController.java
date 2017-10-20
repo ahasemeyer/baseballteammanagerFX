@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * FXML Controller class
+ *
+ * @author Austin Hasemeyer
+ * @document UpdateHitterPageController.java
+ * @description this page will handle updating a Hitters statistics by reading
+ *      the data from several textfields then updating the database record.
  */
 package Controller;
 
@@ -20,11 +23,6 @@ import javafx.scene.control.TextField;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author hasmy
- */
 public class UpdateHitterPageController implements Initializable {
 
     private int counter; 

@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * FXML Controller class
+ *
+ * @author hasmy
+ * @document CreateTeamPageController.java
+ * @description This handles the Create Team Page
  */
 package Controller;
 
@@ -10,30 +12,22 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author hasmy
- */
+
 public class CreateTeamPageController implements Initializable {
 
-
     @FXML private TextField teamName;
-    @FXML private Button createTeamButton;
     @FXML private Label errorMessageLabel; 
     
+    //Pre: Textfield must be filled out
+    //Post: Will create a team if the team name does not already exist
     @FXML
     void handleTeamCreate(ActionEvent event) 
     {
@@ -41,11 +35,13 @@ public class CreateTeamPageController implements Initializable {
         Team newTeam;
         boolean duplicate = false; 
         
+        //check for blank entries
         if(teamName.getText()==null || teamName.getText().equals(" "))
         {
             errorMessageLabel.setText("Please enter a team name.");
         }
         
+        //check if teamname already exists
         try{
             Query duplicateQuery = em.createNativeQuery("SELECT teamid FROM team WHERE teamname=?");
             duplicateQuery.setParameter(1,teamName.getText());
@@ -56,6 +52,7 @@ public class CreateTeamPageController implements Initializable {
             duplicate = false;
         }  
         
+        //If teamname does not already exist create team
         if(!duplicate && teamName.getText()!=null)
         {
             newTeam = Model.DBUtil.createTeam(teamName.getText());
@@ -72,8 +69,5 @@ public class CreateTeamPageController implements Initializable {
 
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+    public void initialize(URL url, ResourceBundle rb) { }    
 }

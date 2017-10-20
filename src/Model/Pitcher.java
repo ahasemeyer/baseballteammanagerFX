@@ -1,3 +1,10 @@
+/**
+ * @author Austin Hasemeyer
+ * @document Pitcher.java
+ * @description This Model class represents Pitcher. Pitchers are anyone in baseball
+ *      who pitches to batters and contains all statistics related to pitching.
+ *      Pitchers are related to Players and share playerID with Players.
+ */
 package Model;
 
 import java.io.Serializable;
@@ -9,10 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.Query;
 import javax.persistence.Table;
 
-/**
- *
- * @author hasmy
- */
 @Entity
 @Table(name = "pitcher")
 public class Pitcher implements Serializable

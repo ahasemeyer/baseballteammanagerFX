@@ -181,9 +181,9 @@
                     </rowConstraints>
                      <children>
                         <Button fx:id="updateHitterButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleUpdateHitter" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Update Hitter" />
-                        <Button fx:id="updateTeamButton" mnemonicParsing="false" onAction="#handleUpdateTeam" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Update Team" GridPane.columnIndex="1" />
-                        <Button fx:id="updateManagerButton" mnemonicParsing="false" onAction="#handleUpdateManager" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Update Manager" GridPane.rowIndex="1" />
-                        <Button fx:id="updatePitcherButton" mnemonicParsing="false" onAction="#handleUpdatePitcher" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Update Pitcher" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button fx:id="updatePitcherButton" mnemonicParsing="false" onAction="#handleUpdatePitcher" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Update Pitcher" GridPane.columnIndex="1" />
+                        <Button fx:id="updateTeamButton" mnemonicParsing="false" onAction="#handleUpdateTeam" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Update Team" GridPane.rowIndex="1" />
+                        <Button fx:id="updateManagerButton" mnemonicParsing="false" onAction="#handleUpdateManager" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Update Manager" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>
@@ -203,8 +203,8 @@
                     </rowConstraints>
                      <children>
                         <Button mnemonicParsing="false" onAction="#handleIndivPlayer" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Individual Player" textAlignment="CENTER" wrapText="true" />
-                        <Button fx:id="lookupPlayersButton" mnemonicParsing="false" onAction="#handleLookupPlayers" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup All  Players" GridPane.columnIndex="1" />
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Players by Team" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
+                        <Button mnemonicParsing="false" onAction="#handleLookupByTeam" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup Players by Team" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" />
+                        <Button fx:id="lookupPlayersButton" mnemonicParsing="false" onAction="#handleLookupPlayers" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup All  Players" GridPane.rowIndex="1" />
                         <Button fx:id="lookupHittersButton" mnemonicParsing="false" onAction="#handleLookupHitters" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup All Hitters" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Button fx:id="lookupPitcherButton" mnemonicParsing="false" onAction="#handleLookupPitchers" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup All Pitchers" GridPane.rowIndex="2" />
                         <Button mnemonicParsing="false" onAction="#handleLookupManager" prefHeight="50.0" prefWidth="140.0" styleClass="btn" stylesheets="@../CSS/mainmenu.css" text="Lookup All Managers" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -232,5 +232,6 @@
             </Pane>
          </children>
       </VBox>
+      <Button layoutX="120.0" layoutY="591.0" mnemonicParsing="false" onAction="#handleTest" text="test" visible="false" />
    </children>
 </AnchorPane>

@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * FXML Controller class
+ *
+ * @author Austin Hasemeyer
+ * @document LookupPlayersPageController.java
+ * @description This class will control the lookup of players and populate
+ *      a TableView with all Players and their given statistics
  */
 package Controller;
 
@@ -23,11 +26,6 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 
-/**
- * FXML Controller class
- *
- * @author hasmy
- */
 public class LookupPlayersPageController implements Initializable {
 
     ObservableList<PlayerFX> data; 

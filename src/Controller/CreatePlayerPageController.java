@@ -1,3 +1,10 @@
+/*
+ * @author Austin Hasemeyer
+ * @document CreatePlayerPageController.java
+ * @description This controller page handles all actions within the 
+ *      create player window. 
+ */
+
 package Controller;
 
 import Model.Player;
@@ -45,6 +52,10 @@ public class CreatePlayerPageController implements Initializable {
     @FXML private ImageView profilePicture; 
     private Image image = null; 
 
+    //Pre: press "Upload Picture" button
+    //Post: File chooser pops up and asks to select a .jpg or .png.
+    //      If one is selected it is set to profilePicutre. Otherwise a abort
+    //      message is displayed. 
     @FXML 
     void handlePicture(ActionEvent event)
     {
@@ -61,6 +72,8 @@ public class CreatePlayerPageController implements Initializable {
         }
     }
     
+    //Pre: Hitter radio selected
+    //Post: if Hitter is selected you cannot be a manager
     @FXML
     boolean handleHitterRadio(ActionEvent event)
     {
@@ -72,7 +85,9 @@ public class CreatePlayerPageController implements Initializable {
         }
         return hitterRadio.isSelected();
     }
-
+    
+    //Pre: Manager radio selected
+    //Post: if Manager is selected you cannot be a Hitter or Pitcher
     @FXML
     boolean handleManagerRadio(ActionEvent event) 
     {
@@ -87,6 +102,8 @@ public class CreatePlayerPageController implements Initializable {
         return managerRadio.isSelected();
     }
 
+    //Pre: Pitcher radio selected
+    //Post: if Pitcher is selected you cannot be a Manager
     @FXML
     boolean handlePitcherRadio(ActionEvent event) 
     {
@@ -99,6 +116,10 @@ public class CreatePlayerPageController implements Initializable {
         return pitcherRadio.isSelected();
     }
 
+    
+    //Pre: all fields must have valid entries
+    //Post: an object of type Player, and possibly Hitter, Pitcher or Manager, is
+    //      created and saved in the MySQL database
     @FXML
     void createPlayerButton(ActionEvent event) 
     {  
@@ -113,6 +134,7 @@ public class CreatePlayerPageController implements Initializable {
         String stringNumber = number.getText(); 
         int inNumber = 0;
 
+        //check for invalid entries
         if(stringNumber.equals(""))
         {
             numberEntered = false;
@@ -184,11 +206,12 @@ public class CreatePlayerPageController implements Initializable {
             lNameError.setVisible(false);
         }
         
-        
+        //display error if necessary
         if(!fNameEntered || !lNameEntered || !numberEntered || !armEntered || !positionEntered
                 || !stanceEntered || !teamEntered)
             errorMessageLabel.setVisible(true);
         
+        //if all entered create player types
         if(fNameEntered && lNameEntered && numberEntered && armEntered && positionEntered
                 && stanceEntered && teamEntered)
         {
@@ -256,28 +279,35 @@ public class CreatePlayerPageController implements Initializable {
         }
     }
 
+    //setup the window
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        assert teamCombo != null;
-        teamCombo.getItems().clear();
+        //set default player picture
         File newfile = new File("src/images/defaultProfile.jpg"); 
         image = new Image(newfile.toURI().toString());
         
+        //connect to db
         EntityManager em = Model.DBUtil.getEM();
         
+        //set team combo to list of teams
+        assert teamCombo != null;
+        teamCombo.getItems().clear();
         Query teams = em.createNativeQuery("SELECT teamname FROM team");
         List<String> list = teams.getResultList();
         list.forEach((team) -> {
             teamCombo.getItems().add(team);
         });
         
+        //set possible batting stances
         assert battingStanceCombo != null;
         battingStanceCombo.getItems().addAll("Right", "Left", "Switch");
         
+        //set positions
         assert positionCombo != null;
-        positionCombo.getItems().addAll("P", "C", "1B", "2B", "3B", "SS", "LF", "CF", "RF", "M");
+        positionCombo.getItems().addAll("P", "C", "1B", "2B", "3B", "SS", "LF", "CF", "RF", "DH", "INF", "OUT", "M");
         
+        //set throwing arm possibilities
         assert throwingArmCombo != null;
         throwingArmCombo.getItems().addAll("Right", "Left");
     }  

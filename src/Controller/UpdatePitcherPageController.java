@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * FXML Controller class
+ *
+ * @author Austin Hasemeyer
+ * @document UpdatePitcherPageController.java
+ * @description This page will update a Pitcher's statistics by reading information
+ *      from several textfields then updating the database record.
  */
 package Controller;
 
@@ -24,11 +27,6 @@ import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author hasmy
- */
 public class UpdatePitcherPageController implements Initializable {
 
     private int counter;  

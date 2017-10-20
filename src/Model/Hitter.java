@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @author Austin Hasemeyer
+ * @document Hitter.java
+ * @description This Model class represents Hitter. Hitters are anyone in baseball
+ *      who bats and contain all statistics related to hitting in baseball. Hitters
+ *      are related to Players and share playerID with Players. 
  */
 package Model;
 
@@ -11,11 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.*;
 
-
-/**
- *
- * @author hasmy
- */
+//Create a SQL table named "hitter" to contain hitter information 
 @Entity
 @Table(name = "hitter")
 public class Hitter implements Serializable 
@@ -60,6 +58,8 @@ public class Hitter implements Serializable
     @Column(name = "TRIPLEHIT")
     private Integer triplehit;
         
+    //Pre: no precond
+    //Post: create a hitter object with default values
     public Hitter()
     {
         playerid = 999; 
@@ -82,7 +82,8 @@ public class Hitter implements Serializable
         rbi = 0;
     }
     
-    
+    //Pre: ID must belong to an existing Player 
+    //Post: Hitter object is created with defaul values besides playerID
     public Hitter(int ID)
     {
         playerid = ID;
@@ -105,6 +106,8 @@ public class Hitter implements Serializable
         rbi = 0;
     }
     
+    //Pre: all parameters must be integers
+    //Post: Hitter object will be updated with a += on each parameter
     public void updateHitter(int AB, int H, int B2, int B3, int HR, int BB, int HBP, int Sac, int SO, int CS, int SB, int RBI)
     {
        updateAB(AB);
@@ -124,11 +127,10 @@ public class Hitter implements Serializable
        updateStealingPerc();
        updateSlugging(); 
        updateOBP(); 
-       
-       
-       
     }
     
+    //Pre: inPlayerID must correlate to an existing Hitter record.
+    //Post: Returns an updated Hitter from the SQL record. 
     public static Hitter loadHitterData(int inPlayerID)
     {
         EntityManager em = Model.DBUtil.getEM();

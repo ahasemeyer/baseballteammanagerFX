@@ -1,17 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * FXML Controller class
+ *
+ * @author Austin Hasemeyer
+ * @document LookupManagerPageController.java
+ * @description Displays a TableView of all Managers with their given stats
  */
 package Controller;
 
 import Model.Manager;
 import Model.ManagerFX;
 import java.net.URL;
-import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,11 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javax.persistence.EntityManager;
 
-/**
- * FXML Controller class
- *
- * @author hasmy
- */
+
 public class LookupManagerPageController implements Initializable 
 {
     ObservableList<ManagerFX> data; 
@@ -37,6 +33,7 @@ public class LookupManagerPageController implements Initializable
     @FXML private TableColumn<ManagerFX, String> wpCol;
     @FXML private TableColumn<ManagerFX, Number> tidCol;
     
+    //Load a TableView with all Managers and their given stats
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {

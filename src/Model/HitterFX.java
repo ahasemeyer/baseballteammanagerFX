@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @author Austin Hasemeyer
+ * @document HitterFX.java
+ * @description This Model class translates information from Java to JavaFX
+ *      SimpleProperties. This is so information can be retrieved from SQL 
+ *      then passed to Java, translated into JavaFX to be displayed in the GUI. 
  */
 package Model;
 

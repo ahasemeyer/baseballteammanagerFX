@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * FXML Controller class
+ *
+ * @author Austin Hasemeyer
+ * @document LookupIndividualPlayerController.java
+ * @description Will allow a user to lookup a single player and display all of
+ *      their information. 
  */
 package Controller;
 
@@ -31,11 +34,6 @@ import javafx.scene.image.ImageView;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author hasmy
- */
 public class LookupIndividualPlayerController implements Initializable 
 {
     @FXML private ComboBox<String> teamCombo;  
@@ -94,6 +92,8 @@ public class LookupIndividualPlayerController implements Initializable
     private String type;
     private final EntityManager em = Model.DBUtil.getEM();
     
+    //Pre: type, team and player must all be selected before lookup
+    //Post: all relevant player information will be displayed
     @FXML
     void handleLookup(ActionEvent event)
     {
@@ -213,21 +213,14 @@ public class LookupIndividualPlayerController implements Initializable
                 mwpCol.setCellValueFactory(cell -> Bindings.format("%.3f", cell.getValue().getWinPercProperty())); 
                 managerTable.setVisible(true);
             }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
         }catch(Exception e){
             System.out.println(e);
         }
     }
     
+    //Pre: Player type must be selected
+    //Post: When a team is selected the plaherCombo is populated with players who
+    //      belong on that team with the given player type. 
     @FXML
     void handleTeam(ActionEvent event)
     {
@@ -239,21 +232,29 @@ public class LookupIndividualPlayerController implements Initializable
         hitterTable.setVisible(false);
         pitcherTable.setVisible(false);
         managerTable.setVisible(false);
-        List<Integer>pitcherIDList = null; 
+        List<Integer>returnedPlayerID = null; 
         List<Integer>playerIDList =  null;
         int counter1 = 0;
+        
+        //get teamid for the selected team
         try{
             String selectedTeam = teamCombo.getSelectionModel().getSelectedItem();
             Query teamIDQuery = em.createNativeQuery("SELECT teamid FROM team WHERE teamname=?");
             teamIDQuery.setParameter(1,selectedTeam);
             int teamID = (int)teamIDQuery.getSingleResult();
+            
+            //get a list of all players on that team
             Query playerIDSQL = em.createNativeQuery("SELECT playerid FROM player WHERE teamid=?");
             playerIDSQL.setParameter(1,teamID);
             playerIDList = playerIDSQL.getResultList();
+            
+            //get the selected type of player
             String selectedType = typeCombo.getSelectionModel().getSelectedItem(); 
             type = selectedType; 
-            Query pitcherIDSQL = em.createNativeQuery("SELECT playerid FROM "+selectedType);
-            pitcherIDList = pitcherIDSQL.getResultList();
+            
+            //get a list of all player in the given type
+            Query aPlayerIDSQL = em.createNativeQuery("SELECT playerid FROM "+selectedType);
+            returnedPlayerID = aPlayerIDSQL.getResultList();
 
             counter = 0; 
             int[] playerIDArray = new int[playerIDList.size()];
@@ -263,8 +264,8 @@ public class LookupIndividualPlayerController implements Initializable
             });
 
             counter = 0; 
-            int[] pitcherIDArray = new int[pitcherIDList.size()];
-            pitcherIDList.forEach((data) -> {
+            int[] pitcherIDArray = new int[returnedPlayerID.size()];
+            returnedPlayerID.forEach((data) -> {
                 pitcherIDArray[counter]=data;
                 counter++;
             });
@@ -273,7 +274,7 @@ public class LookupIndividualPlayerController implements Initializable
             int[] actualPlayerID = new int[playerIDList.size()];
             for(int i=0; i<playerIDList.size(); i++)
             {
-                for(int j=0; j<pitcherIDList.size(); j++)
+                for(int j=0; j<returnedPlayerID.size(); j++)
                 {
                     if(playerIDArray[i]==pitcherIDArray[j])
                     {
@@ -298,6 +299,7 @@ public class LookupIndividualPlayerController implements Initializable
         }
     }
     
+    
     @FXML
     void handleType(ActionEvent event)
     {
@@ -319,12 +321,12 @@ public class LookupIndividualPlayerController implements Initializable
         });
     }
     
+    //functionless
     @FXML
     void handlePlayer(ActionEvent event)
-    {
-        
-    }
+    { }
     
+    //Load typeCombo with Hitter, Pitcher and Manager
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {     

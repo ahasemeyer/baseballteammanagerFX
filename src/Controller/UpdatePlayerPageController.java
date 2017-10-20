@@ -1,7 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * FXML Controller class
+ *
+ * @author Austin Hasemeyer
+ * @document UpdatePlayerPageController.java
+ * @description This page will update a Player's basic information, such as name,
+ *      number, picture, etc. This information will update the database record as 
+ *      well as the profile picture. 
  */
 package Controller;
 
@@ -14,10 +18,7 @@ import java.util.ResourceBundle;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -26,16 +27,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author hasmy
- */
 public class UpdatePlayerPageController implements Initializable {
 
     private int counter; 
@@ -369,7 +364,7 @@ public class UpdatePlayerPageController implements Initializable {
         stanceCombo.getItems().addAll("Right", "Left", "Switch");
         
         assert positionCombo != null;
-        positionCombo.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "M");
+        positionCombo.getItems().addAll("P", "C", "1B", "2B", "3B", "SS", "LF", "CF", "RF", "DH", "INF", "OUT", "M");
         
         assert armCombo != null;
         armCombo.getItems().addAll("Right", "Left");

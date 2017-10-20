@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * @author Austin Hasemeyer
+ * @document TeamManagerJavaFX.java
+ * @description This is the main launch class. This will open the program to 
+        the login page which will handle entering the program.
  */
 package teammanagerjavafx;
 
@@ -14,30 +15,20 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
-/**
- *
- * @author hasmy
- */
 public class TeamManagerJavaFx extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/View/mainMenu.fxml"));
-        //Image test = ImageIO.read(getClass().getResource("Baseball.jpg")); 
+        Parent root = FXMLLoader.load(getClass().getResource("/View/loginPage.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.getIcons().add(new Image("/images/Baseball.png"));
-        stage.setTitle("Baseball League Manager");
+        stage.setTitle("Login!");
         stage.show();
         stage.setOnCloseRequest(e -> Platform.exit());
-        
-        
-       // Image test = ImageIO.read(getClass().getResource("Baseball.jpg")); 
     }
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String[] args) {
         launch(args);
     }

@@ -1,11 +1,8 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
     Created on : Sep 29, 2017, 9:55:46 AM
     Author     : hasmy
+    Description: Styling for the main page of BML. All other pages also
+        use the same styling as the main menu. 
 */
 
 .buttonPane {
@@ -13,7 +10,6 @@ and open the template in the editor.
     -fx-background-radius: 2;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
 }
-
 
 .anchorPane {
   -fx-background-image: url("/images/dirt.jpg"); 

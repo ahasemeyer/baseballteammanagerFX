@@ -6,7 +6,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="594.0" prefWidth="689.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LookupPlayersPageController">
    <children>
-      <TableView fx:id="table" layoutX="4.0" layoutY="6.0" prefHeight="585.0" prefWidth="680.0">
+      <TableView fx:id="table" layoutX="4.0" layoutY="6.0" maxHeight="1.7976931348623157E308" prefHeight="585.0" prefWidth="680.0">
         <columns>
           <TableColumn fx:id="id" prefWidth="44.333343505859375" text="ID" />
           <TableColumn fx:id="fName" prefWidth="89.0" text="First Name" />

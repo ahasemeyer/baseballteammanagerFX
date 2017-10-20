@@ -1,10 +1,13 @@
+/**
+ * @author Austin Hasemeyer
+ * @document DBUtil.java
+ * @description This is a Utility class which handles all interactions with 
+ *      the SQL database. These include connecting and passing information. 
+ */
 package Model;
 
 import javax.persistence.*;
-/**
- *
- * @author austin hasemeyer
- */
+
 public class DBUtil 
 {    
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("TeamManagerJavaFxPU");
@@ -287,6 +290,21 @@ public class DBUtil
             System.out.println("Exception in Update Pitcher "+e.getMessage());
             e.printStackTrace();
             return null;
+        }
+    }
+    
+    public static void createUser(AppUsers user)
+    {
+        try {
+            System.out.println("Create user started.");
+            EntityManager em = getEM();
+            em.getTransaction().begin();
+            em.persist(user);
+            em.getTransaction().commit();
+            em.close();
+            System.out.println("Create user finished.");
+        } catch (Exception e){
+            System.out.println("Exception in create User "+e.getMessage());
         }
     }
 }

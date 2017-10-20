@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @author Austin Hasemeyer
+ * @document Player.java
+ * @description This Model class represents Team. Teams are the only class that
+ *      does not require a player object to be created. Players must have a team
+ *      but teams do not require players. 
  */
 package Model;
 
@@ -16,10 +18,6 @@ import javax.persistence.Id;
 import javax.persistence.Query;
 import javax.persistence.Table;
 
-/**
- *
- * @author hasmy
- */
 @Entity
 @Table(name = "team")
 public class Team implements Serializable
@@ -41,11 +39,12 @@ public class Team implements Serializable
     @Column(name = "WINS")
     private Integer wins;
     
-    
+    //default constructor
     public Team()
-    {
-    }
+    {}
     
+    //Pre: inTeamName must be unique
+    //Post: a team object is created
     public Team(String inTeamName)
     {
         teamName = inTeamName;
@@ -55,6 +54,8 @@ public class Team implements Serializable
         winPerc = 0.0;
     }
     
+    //Pre: inTeamID must be generated and unique
+    //Post: creates a team with a teamID, used for testing
     public Team(int inTeamID)
     {
         teamID = inTeamID; 
@@ -65,6 +66,8 @@ public class Team implements Serializable
         winPerc = 0.0;
     }
     
+    //Pre: inTeamID must unique and generated, Team name must also be unique
+    //Post: team object is created with a teamID and teamName
     public Team(int inTeamID, String name)
     {
         teamID = inTeamID; 
@@ -75,6 +78,8 @@ public class Team implements Serializable
         winPerc = 0.0;
     }
     
+    //Pre: param ID must already exist in the SQL database
+    //Post: a Team object is loaded with data from the SQL database and returned
     public static Team loadTeamData(int ID)
     {
         EntityManager em = Model.DBUtil.getEM();

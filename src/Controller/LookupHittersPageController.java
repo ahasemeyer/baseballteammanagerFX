@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * FXML Controller class
+ *
+ * @author Austin Hasemeyer
+ * @document LookupHittersPageController.java
+ * @description This page will display a TableView which is populated
+ *      with a list of all Hitters and all of their information
  */
 package Controller;
 
@@ -19,11 +22,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javax.persistence.EntityManager;
 
-/**
- * FXML Controller class
- *
- * @author hasmy
- */
 public class LookupHittersPageController implements Initializable {
     
     ObservableList<HitterFX> data; 
@@ -47,6 +45,7 @@ public class LookupHittersPageController implements Initializable {
     @FXML private TableColumn<HitterFX, Number> soCol;
     @FXML private TableColumn<HitterFX, Number> rbiCol; 
     
+    //Load the TableView will data from all Hitters
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {

@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @author Austin Hasemeyer
+ * @document Manager.java
+ * @description This Model class represents a Manager object. A Manager is related 
+ *      to a Player object by playerID. A manager will contain all statistics
+ *      that a manager in baseball could have. 
  */
 package Model;
 
@@ -14,10 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.Query;
 import javax.persistence.Table;
 
-/**
- *
- * @author hasmy
- */
 @Entity
 @Table(name = "manager")
 public class Manager implements Serializable

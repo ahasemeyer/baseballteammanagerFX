@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * FXML Controller class
+ *
+ * @author Austin Hasemeyer
+ * @document LookupPitchersPageController.java
+ * @description Will load a TableView with all Pitches and their given stats
  */
 package Controller;
 
@@ -19,11 +21,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javax.persistence.EntityManager;
 
-/**
- * FXML Controller class
- *
- * @author hasmy
- */
 public class LookupPitchersPageController implements Initializable {
     
     ObservableList<PitcherFX> data; 
@@ -47,6 +44,7 @@ public class LookupPitchersPageController implements Initializable {
     @FXML private TableColumn<PitcherFX, Number> svoCol;
     @FXML private TableColumn<PitcherFX, Number> soCol;
     
+    //Load a TableView with all Pitchers and their given stats
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {

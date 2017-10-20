@@ -1,13 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * FXML Controller class
+ *
+ * @author Austin Hasemeyer
+ * @document MainMenuController.java
+ * @description This is the main menu for BLM. It handles all page loading and
+ *      navigation throughout the program. It also will display a leader board
+ *      and the league standings.
  */
 package Controller;
 
 import Model.Hitter;
 import Model.Pitcher;
-import Model.Player;
 import Model.Team;
 import Model.TeamFX;
 import java.net.URL;
@@ -30,11 +33,6 @@ import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author hasmy
- */
 public class MainMenuController implements Initializable {
 
     private static final EntityManager em = Model.DBUtil.getEM();
@@ -82,13 +80,21 @@ public class MainMenuController implements Initializable {
     @FXML
     void handleTopHitters(ActionEvent event)
     {
-        this.loadTopHitters();
+        try{
+            this.loadTopHitters();
+        }catch(Exception e){
+            System.out.println("Cannot Load Top Hitters");
+        }
     }
     
     @FXML
     void handleTopPitchers(ActionEvent event)
     {
-        this.loadTopPitchers();
+        try{
+            this.loadTopPitchers();
+        }catch(Exception e){
+            System.out.println("Cannot Load Top Pitchers"); 
+        }
     }
     
     @FXML
@@ -281,6 +287,22 @@ public class MainMenuController implements Initializable {
             stage.show();
         }catch(Exception e){
             System.out.println("Cant load new window");
+        }
+    }
+    
+    @FXML
+    void handleLookupByTeam(ActionEvent event)
+    {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/lookupPlayersByTeam.fxml"));
+            Parent root1 = (Parent)fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.getIcons().add(new Image(baseballIcon));
+            stage.setTitle("Lookup by Team");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        }catch(Exception e){
+            System.out.println(e);
         }
     }
     
@@ -667,11 +689,26 @@ public class MainMenuController implements Initializable {
         lsteamCol.setCellValueFactory(cell -> cell.getValue().getTeamNameProperty());        
     }
     
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        loadLeagueStandings();
-        loadTopHitters(); 
-    }   
+        try{
+            loadLeagueStandings();
+        }catch(Exception e){
+            System.out.println("Cannot load League Standings");
+        }
+        
+        try{
+            loadTopHitters();
+        }catch(Exception e){
+            System.out.println("Cannot load League Leaders");
+        }                  
+    }  
+    
+    
+    @FXML
+    public void handleTest(ActionEvent event)
+    {
+        System.out.println(LoginPageController.getUserID());
+    }
 }

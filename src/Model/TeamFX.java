@@ -1,13 +1,15 @@
+/**
+ * @author Austin Hasemeyer
+ * @document ManagerFX.java
+ * @description This Model class translates information from Java to JavaFX
+ *      SimpleProperties. This is so information can be retrieved from SQL 
+ *      then passed to Java, translated into JavaFX to be displayed in the GUI. 
+ */
 package Model;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-
-/**
- *
- * @author hasmy
- */
 
 public final class TeamFX
 {

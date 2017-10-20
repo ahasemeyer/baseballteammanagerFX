@@ -12,9 +12,10 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="221.0" prefWidth="608.0" styleClass="anchorPane" stylesheets="@../CSS/mainmenu.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LookupIndividualPlayerController">
+<AnchorPane id="AnchorPane" prefHeight="213.0" prefWidth="612.0" styleClass="anchorPane" stylesheets="@../CSS/mainmenu.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LookupIndividualPlayerController">
    <children>
       <Pane layoutX="166.0" layoutY="117.0" prefHeight="85.0" prefWidth="435.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css" />
       <HBox layoutX="14.0" layoutY="5.0" prefHeight="45.0" prefWidth="587.0" spacing="5.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
@@ -105,14 +106,17 @@
             <TableColumn fx:id="mwpCol" prefWidth="75.0" text="W %" />
         </columns>
       </TableView>
-      <Pane layoutX="14.0" layoutY="57.0" prefHeight="157.0" prefWidth="143.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
+      <VBox layoutX="14.0" layoutY="56.0" prefHeight="146.0" prefWidth="12.0" styleClass="buttonPane" stylesheets="@../CSS/mainmenu.css">
          <children>
-            <ImageView fx:id="profilePicture" fitHeight="140.0" fitWidth="128.0" layoutX="8.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="profilePicture" fitHeight="130.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/defaultProfile.jpg" />
                </image>
             </ImageView>
          </children>
-      </Pane>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </VBox>
    </children>
 </AnchorPane>

@@ -1,3 +1,11 @@
+/**
+ * FXML Controller class
+ *
+ * @author Austin Hasemeyer
+ * @document UpdateManagerPageController.java
+ * @description This page will update a Managers statistics by reading information
+ *      from textfields and updating the database record.
+ */
 package Controller;
 
 import Model.Manager;
@@ -15,11 +23,6 @@ import javafx.scene.control.TextField;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author hasmy
- */
 public class UpdateManagerPageController implements Initializable {
 
     private int counter; 
